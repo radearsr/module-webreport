@@ -20,7 +20,7 @@ const postLoginWeb = async (username, password) => {
   return responseData;
 }
 
-const getPriceLists = async () => {
+const getPriceLists = async (token) => {
   const config = {
     method: "GET",
     url: "http://123.231.239.170:8181/api/pricelist",

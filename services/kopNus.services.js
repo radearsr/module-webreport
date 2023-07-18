@@ -20,7 +20,7 @@ const postLoginWeb = async (username, password) => {
   return responseData;
 };
 
-const getPriceLists = async () => {
+const getPriceLists = async (token) => {
   const config = {
     method: "GET",
     url: "http://103.78.38.75:8082/api/pricelist",

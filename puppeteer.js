@@ -20,10 +20,10 @@ const puppeteer = require('puppeteer');
 
   const htmlContent = await page.content();
   console.log(htmlContent);
-  
+
   await page.waitForSelector(loginButtonSelector);
   await page.click(loginButtonSelector);
-
+j6JsfTD8ScQZrF9ltiiBiyPZqLtBa0rVyt1ZDGVF
 
   // Close the browser
   // await browser.close();
