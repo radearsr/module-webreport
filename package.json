@@ -1,0 +1,18 @@
+{
+  "name": "modul-webreport",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "crypto-js": "^4.1.1",
+    "qs": "^6.11.2",
+    "tough-cookie": "^4.1.3"
+  }
+}
