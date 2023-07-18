@@ -9,7 +9,7 @@ const applicationId = "dbb28fda-31c6-4579-0671-de10146c4b83";
 const restApiKey = "b6478c6f-3074-43c9-03d4-d52b6ef9005f";
 
 const encryptedPassword = (password) => {
-  return CryptoJS.MD5("pmk123").toString();
+  return CryptoJS.MD5(password).toString();
 }
 
 module.exports = {
