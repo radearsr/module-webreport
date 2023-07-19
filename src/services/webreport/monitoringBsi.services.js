@@ -1,5 +1,5 @@
 const axios = require("axios");
-const utilsMonitoringBsi = require("../utils/monitoringBsi/monitoringBsi.utils");
+const utilsMonitoringBsi = require("../../utils/monitoringBsi/monitoringBsi.utils");
 const { applicationId, dsguid, restApiKey } = utilsMonitoringBsi;
 
 const postLoginWeb = async (username, password) => {

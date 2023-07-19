@@ -1,5 +1,5 @@
 const axios = require("axios");
-const utilsHotspotReload = require("../utils/hotspotReload/hotspot.utils");
+const utilsHotspotReload = require("../../utils/hotspotReload/hotspot.utils");
 
 const postLoginWeb = async (username, password) => {
   const payload = utilsHotspotReload.getEncryptedPayload(username, password);
