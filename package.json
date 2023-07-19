@@ -5,7 +5,17 @@
   "main": "./src/main.js",
   "scripts": {
     "tw-build:watch": "npx tailwindcss -i ./src/css/input.css -o ./public/styles.css --watch",
-    "tw-build": "npx tailwindcss -i ./src/css/input.css -o ./public/styles.css"
+    "tw-build": "npx tailwindcss -i ./src/css/input.css -o ./public/styles.css",
+    "start": "npx electron .",
+    "dev": "nodemon --exec electron .",
+    "build": "npx electron-builder"
+  },
+  "build": {
+    "productName": "Module_Web_Reports",
+    "win": {
+      "icon": "assets/injection.png",
+      "artifactName": "${productName}_${version}.${ext}"
+    }
   },
   "keywords": [],
   "author": "",
@@ -22,6 +32,8 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
+    "electron": "^25.3.0",
+    "nodemon": "^3.0.1",
     "postcss": "^8.4.26",
     "tailwindcss": "^3.3.3"
   }

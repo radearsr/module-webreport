@@ -2,11 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <!-- Meta For Electron (comment this if want to run html only) -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'" />
     <title>Module Web Report</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Welcome h1</h1>
+    <script src="scripts.js"></script>
+    <!-- Script For Electron (comment this if want to run html only) -->
+    <script src="renderer.js"></script>
   </body>
 </html>
