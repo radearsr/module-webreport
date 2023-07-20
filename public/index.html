@@ -15,21 +15,20 @@
       <!-- Navigation Bar -->
       <div class="flex flex-row h-full">
         <nav
-          class="flex flex-col bg-amber-50 transition-all duration-500 ease-in-out relative w-64">
+          class="flex flex-col bg-lime-50 transition-all duration-500 ease-in-out relative w-64">
           <div class="mt-5 mb-5">
-            <div class="flex flex-col mt-4 items-end me-4"></div>
-            <div class="flex w-100 justify-center">
-              <h1 class="uppercase text-lg">module web reports</h1>
+            <div class="flex w-100 mt-4 justify-center">
+              <h1 class="uppercase text-xl font-bold text-lime-600">module web reports</h1>
             </div>
             <div class="mt-8">
               <ul>
                 <li class="text-center relative">
-                  <a class="uppercase flex items-center p-4" href="#show">
+                  <a class="uppercase flex items-center p-4" href="#analytics">
                     <span>
                       <svg
-                        fill="#000000"
-                        width="24px"
-                        height="24px"
+                        fill="rgb(163 230 53)"
+                        width="32px"
+                        height="32px"
                         viewBox="0 0 36 36"
                         version="1.1"
                         preserveAspectRatio="xMidYMid meet"
@@ -46,41 +45,41 @@
                           fill-opacity="0" />
                       </svg>
                     </span>
-                    <span class="mx-3">analytics</span>
+                    <span class="mx-3 text-neutral-500">analytics</span>
                   </a>
                 </li>
                 <li class="text-center relative">
                   <a class="uppercase flex items-center p-4" href="#login">
                     <span>
                       <svg
-                        width="24px"
-                        height="24px"
+                        width="32px"
+                        height="32px"
                         viewBox="0 0 1024 1024"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
-                          fill="#000000"
+                          fill="rgb(163 230 53)"
                           d="M628.736 528.896A416 416 0 0 1 928 928H96a415.872 415.872 0 0 1 299.264-399.104L512 704l116.736-175.104zM720 304a208 208 0 1 1-416 0 208 208 0 0 1 416 0z" />
                       </svg>
                     </span>
-                    <span class="mx-3 text-sm">login</span>
+                    <span class="mx-3 text-neutral-500">login</span>
                   </a>
                 </li>
                 <li class="text-center relative">
                   <a
-                    class="uppercase flex items-center p-4 bg-slate-300"
-                    href="#login">
+                    class="uppercase flex items-center p-4 bg-lime-400"
+                    href="#logs">
                     <span>
                       <svg
-                        width="24px"
-                        height="24px"
+                        width="32px"
+                        height="32px"
                         viewBox="0 0 1024 1024"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
-                          fill="#000000"
+                          fill="#FFFFFF"
                           d="M704 192h160v736H160V192h160v64h384v-64zM288 512h448v-64H288v64zm0 256h448v-64H288v64zm96-576V96h256v96H384z" />
                       </svg>
                     </span>
-                    <span class="mx-3">logs</span>
+                    <span class="mx-3 text-white font-bold">logs</span>
                   </a>
                 </li>
               </ul>
@@ -90,15 +89,15 @@
       </div>
       <!-- Content -->
       <div
-        class="flex flex-col flex-grow h-screen overflow-y-auto overflow-x-hidden">
-        <section id="show">
-          <h1>Hello I'm Show Page</h1>
+        class="flex flex-col flex-grow h-screen overflow-y-auto overflow-x-hidden bg-stone-50">
+        <section id="analytics" class="hidden">
+          <h1>Hello I'm Analytics Page</h1>
         </section>
-        <section id="login">
-          <h1>Hello I'm Show Page</h1>
+        <section id="login" class="hidden">
+          <h1>Hello I'm Login Page</h1>
         </section>
         <section id="logs">
-          <h1>Hello I'm Show Page</h1>
+          <h1>Hello I'm Logs Page</h1>
         </section>
       </div>
     </div>
