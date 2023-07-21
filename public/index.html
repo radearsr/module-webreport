@@ -128,7 +128,7 @@
           <!-- Awal Section Analystics -->
           <section id="analytics" class="">
             <h1
-              :class="sidebarOpen? 'text-2xl' : 'text-sm'"
+              :class="sidebarOpen? 'text-3xl' : 'text-sm'"
               class="text-black font-bold py-5 px-2 transition-all duration-500">
               Analytics
             </h1>
@@ -271,7 +271,7 @@
           <!-- Awal Section Login -->
           <section id="login" class="hidden">
             <h1
-              :class="sidebarOpen? 'text-4xl' : 'text-sm'"
+              :class="sidebarOpen? 'text-3xl' : 'text-sm'"
               class="text-black font-bold py-5 px-2 transition-all duration-500">
               Login
             </h1>
@@ -282,8 +282,10 @@
                   class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
                   <span
                     class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
-                  <form action="" method="post">
-                    <h2 class="text-center text-3xl font-bold">Hello World</h2>
+                  <form action="" method="post" id="hotspot">
+                    <h2 class="text-center text-2xl font-bold uppercase">
+                      hotspot
+                    </h2>
                     <div class="flex flex-col w-full mt-6">
                       <label for="" class="font-thin mb-1">Username</label>
                       <input
@@ -314,8 +316,10 @@
                   class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
                   <span
                     class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
-                  <form action="" method="post">
-                    <h2 class="text-center text-3xl font-bold">Hello World</h2>
+                  <form action="" method="post" id="monitoringBsi">
+                    <h2 class="text-center text-2xl font-bold uppercase">
+                      Monitoring Bsi
+                    </h2>
                     <div class="flex flex-col w-full mt-6">
                       <label for="" class="font-thin mb-1">Username</label>
                       <input
@@ -346,8 +350,10 @@
                   class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
                   <span
                     class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
-                  <form action="" method="post">
-                    <h2 class="text-center text-3xl font-bold">Hello World</h2>
+                  <form action="" method="post" id="kopnus">
+                    <h2 class="text-center text-2xl font-bold uppercase">
+                      kopnus
+                    </h2>
                     <div class="flex flex-col w-full mt-6">
                       <label for="" class="font-thin mb-1">Username</label>
                       <input
@@ -378,8 +384,10 @@
                   class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
                   <span
                     class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
-                  <form action="" method="post">
-                    <h2 class="text-center text-3xl font-bold">Hello World</h2>
+                  <form action="" method="post" id="pluslink">
+                    <h2 class="text-center text-2xl font-bold uppercase">
+                      pluslink
+                    </h2>
                     <div class="flex flex-col w-full mt-6">
                       <label for="" class="font-thin mb-1">Username</label>
                       <input
@@ -410,8 +418,10 @@
                   class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
                   <span
                     class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
-                  <form action="" method="post">
-                    <h2 class="text-center text-3xl font-bold">Hello World</h2>
+                  <form action="" method="post" id="gamma">
+                    <h2 class="text-center text-2xl font-bold uppercase">
+                      gamma
+                    </h2>
                     <div class="flex flex-col w-full mt-6">
                       <label for="" class="font-thin mb-1">Username</label>
                       <input
@@ -442,8 +452,10 @@
                   class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
                   <span
                     class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
-                  <form action="" method="post">
-                    <h2 class="text-center text-3xl font-bold">Hello World</h2>
+                  <form action="" method="post" id="cyrus">
+                    <h2 class="text-center text-2xl font-bold uppercase">
+                      cyrus
+                    </h2>
                     <div class="flex flex-col w-full mt-6">
                       <label for="" class="font-thin mb-1">Username</label>
                       <input
@@ -475,7 +487,9 @@
                   <span
                     class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
                   <form action="" method="post">
-                    <h2 class="text-center text-3xl font-bold">Hello World</h2>
+                    <h2 class="text-center text-2xl font-bold uppercase">
+                      Hello World
+                    </h2>
                     <div class="flex flex-col w-full mt-6">
                       <label for="" class="font-thin mb-1">Username</label>
                       <input
@@ -507,7 +521,9 @@
                   <span
                     class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
                   <form action="" method="post">
-                    <h2 class="text-center text-3xl font-bold">Hello World</h2>
+                    <h2 class="text-center text-2xl font-bold uppercase">
+                      Hello World
+                    </h2>
                     <div class="flex flex-col w-full mt-6">
                       <label for="" class="font-thin mb-1">Username</label>
                       <input
@@ -538,7 +554,7 @@
           <!-- Awal Section Logs -->
           <section id="logs" class="hidden">
             <h1
-              :class="sidebarOpen? 'text-2xl' : 'text-sm'"
+              :class="sidebarOpen? 'text-3xl' : 'text-sm'"
               class="text-black font-bold py-5 px-2 transition-all duration-500">
               Logs
             </h1>
@@ -852,6 +868,7 @@
       </main>
       <!-- Akhir Main Content -->
     </div>
+    <script src="form-controller.js"></script>
     <script src="navigation.js"></script>
     <script src="scripts.js"></script>
     <script src="alpinejs.js"></script>
