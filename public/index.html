@@ -10,99 +10,194 @@
     <title>Module Web Report</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <div class="flex flex-row h-screen">
-      <!-- Navigation Bar -->
-      <div class="flex flex-row h-full">
-        <nav
-          class="flex flex-col bg-lime-50 transition-all duration-500 ease-in-out relative w-64">
-          <div class="mt-5 mb-5">
-            <div class="flex w-100 mt-4 justify-center">
-              <h1 class="uppercase text-xl font-bold text-lime-600">module web reports</h1>
-            </div>
-            <div class="mt-8">
-              <ul>
-                <li class="text-center relative">
-                  <a class="uppercase flex items-center p-4" href="#analytics">
-                    <span>
-                      <svg
+  <body x-data="{ sidebarOpen: true }">
+    <div class="flex h-screen">
+      <main class="flex">
+        <aside
+          :class="sidebarOpen ? 'w-60' : 'w-20'"
+          class="w-1/4 transition-all duration-500 bg-lime-50"
+        >
+          <div class="p-4">
+            <!-- Button Toggle -->
+            <button @click="sidebarOpen = !sidebarOpen" class="text-black">
+              <svg
+                class="h-6 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+              </svg>
+            </button>
+            <h1
+              :class="sidebarOpen ? 'text-2xl' : 'text-sm'"
+              class="text-black font-bold py-5 px-2 transition-all duration-500"
+            >
+              Sidebar
+            </h1>
+
+            <ul>
+              <li>
+                <a
+                  class="uppercase flex items-center text-center gap-x-2 py-5 px-2"
+                  href="#analytics"
+                >
+                  <span>
+                    <svg
+                      fill="rgb(163 230 53)"
+                      width="32px"
+                      height="32px"
+                      viewBox="0 0 36 36"
+                      version="1.1"
+                      preserveAspectRatio="xMidYMid meet"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                      <path
+                        class="clr-i-solid clr-i-solid-path-1"
+                        d="M 32 5 L 4 5 C 2.896 5 2 5.896 2 7 L 2 29 C 2 30.105 2.896 31 4 31 L 32 31 C 33.105 31 34 30.105 34 29 L 34 7 C 34 5.896 33.105 5 32 5 Z M 22.56 25.94 L 15.46 15.36 L 9.12 24.64 L 4.62 20.64 L 6 19.05 L 8.7 21.44 L 15.46 11.56 L 22.65 22.27 L 29.65 13 L 31.35 14.28 Z"
+                      ></path>
+                      <rect
+                        x="0"
+                        y="0"
+                        width="36"
+                        height="36"
+                        fill-opacity="0"
+                      />
+                    </svg>
+                  </span>
+                  <span
+                    :class="sidebarOpen ? 'block' : 'hidden'"
+                    class="mx-3 text-neutral-500 transition-all duration-500"
+                    >analytics</span
+                  >
+                </a>
+              </li>
+              <li>
+                <a
+                  class="uppercase flex items-center text-center gap-x-2 py-5 px-2"
+                  href="#login"
+                >
+                  <span>
+                    <svg
+                      width="32px"
+                      height="32px"
+                      viewBox="0 0 1024 1024"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
                         fill="rgb(163 230 53)"
-                        width="32px"
-                        height="32px"
-                        viewBox="0 0 36 36"
-                        version="1.1"
-                        preserveAspectRatio="xMidYMid meet"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <path
-                          class="clr-i-solid clr-i-solid-path-1"
-                          d="M 32 5 L 4 5 C 2.896 5 2 5.896 2 7 L 2 29 C 2 30.105 2.896 31 4 31 L 32 31 C 33.105 31 34 30.105 34 29 L 34 7 C 34 5.896 33.105 5 32 5 Z M 22.56 25.94 L 15.46 15.36 L 9.12 24.64 L 4.62 20.64 L 6 19.05 L 8.7 21.44 L 15.46 11.56 L 22.65 22.27 L 29.65 13 L 31.35 14.28 Z"></path>
-                        <rect
-                          x="0"
-                          y="0"
-                          width="36"
-                          height="36"
-                          fill-opacity="0" />
-                      </svg>
-                    </span>
-                    <span class="mx-3 text-neutral-500">analytics</span>
-                  </a>
-                </li>
-                <li class="text-center relative">
-                  <a class="uppercase flex items-center p-4" href="#login">
-                    <span>
-                      <svg
-                        width="32px"
-                        height="32px"
-                        viewBox="0 0 1024 1024"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          fill="rgb(163 230 53)"
-                          d="M628.736 528.896A416 416 0 0 1 928 928H96a415.872 415.872 0 0 1 299.264-399.104L512 704l116.736-175.104zM720 304a208 208 0 1 1-416 0 208 208 0 0 1 416 0z" />
-                      </svg>
-                    </span>
-                    <span class="mx-3 text-neutral-500">login</span>
-                  </a>
-                </li>
-                <li class="text-center relative">
-                  <a
-                    class="uppercase flex items-center p-4 bg-lime-400"
-                    href="#logs">
-                    <span>
-                      <svg
-                        width="32px"
-                        height="32px"
-                        viewBox="0 0 1024 1024"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          fill="#FFFFFF"
-                          d="M704 192h160v736H160V192h160v64h384v-64zM288 512h448v-64H288v64zm0 256h448v-64H288v64zm96-576V96h256v96H384z" />
-                      </svg>
-                    </span>
-                    <span class="mx-3 text-white font-bold">logs</span>
-                  </a>
-                </li>
-              </ul>
+                        d="M628.736 528.896A416 416 0 0 1 928 928H96a415.872 415.872 0 0 1 299.264-399.104L512 704l116.736-175.104zM720 304a208 208 0 1 1-416 0 208 208 0 0 1 416 0z"
+                      />
+                    </svg>
+                  </span>
+                  <span
+                    :class="sidebarOpen ? 'block' : 'hidden'"
+                    class="mx-3 text-neutral-500 transition-all duration-500 transition-all duration-500"
+                    >login</span
+                  >
+                </a>
+              </li>
+              <li>
+                <a
+                  class="uppercase flex items-center text-center gap-x-2 py-5 px-2 bg-lime-500"
+                  href="#logs"
+                >
+                  <span>
+                    <svg
+                      width="32px"
+                      height="32px"
+                      viewBox="0 0 1024 1024"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill="#FFFFFF"
+                        d="M704 192h160v736H160V192h160v64h384v-64zM288 512h448v-64H288v64zm0 256h448v-64H288v64zm96-576V96h256v96H384z"
+                      />
+                    </svg>
+                  </span>
+                  <span
+                    :class="sidebarOpen ? 'block' : 'hidden'"
+                    class="mx-3 text-white"
+                    >logs</span
+                  >
+                </a>
+              </li>
+            </ul>
+          </div>
+        </aside>
+        <div class="p-4">
+          <h1 class="text-2xl font-bold mb-5">Konten Utama</h1>
+          <!-- Input Search -->
+          <div class="flex gap-x-4 rounded-md">
+            <div
+              class="px-10 py-20 rounded-lg bg-lime-50 mb-6 flex flex-col text-center"
+            >
+              <span class="text-2xl">Emoney</span>
+              <span href="" class="mt-3 font-light text-gray-500">Dana</span>
+              <span href="" class="mt-1 font-light text-gray-500">Shopee</span>
+              <span href="" class="mt-1 font-light text-gray-500">Linkaja</span>
+            </div>
+            <div
+              class="px-10 py-20 rounded-lg bg-lime-50 mb-6 flex flex-col text-center"
+            >
+              <span class="text-2xl">Indosat</span>
+              <span href="" class="mt-3 font-light text-gray-500">Pulsa</span>
+              <span href="" class="mt-1 font-light text-gray-500"
+                >Paket Data</span
+              >
+            </div>
+            <div
+              class="px-10 py-20 rounded-lg bg-lime-50 mb-6 flex flex-col text-center"
+            >
+              <span class="text-2xl">Telkomsel</span>
+              <span href="" class="mt-3 font-light text-gray-500">Pulsa</span>
+              <span href="" class="mt-1 font-light text-gray-500"
+                >Paket Data</span
+              >
             </div>
           </div>
-        </nav>
-      </div>
-      <!-- Content -->
-      <div
-        class="flex flex-col flex-grow h-screen overflow-y-auto overflow-x-hidden bg-stone-50">
-        <section id="analytics" class="hidden">
-          <h1>Hello I'm Analytics Page</h1>
-        </section>
-        <section id="login" class="hidden">
-          <h1>Hello I'm Login Page</h1>
-        </section>
-        <section id="logs">
-          <h1>Hello I'm Logs Page</h1>
-        </section>
-      </div>
+
+          <!-- Table -->
+          <!-- <table class="w-full table-auto">
+            <thead>
+              <tr>
+                <th class="px-4 py-2 bg-gray-200">Kolom 1</th>
+                <th class="px-4 py-2 bg-gray-200">Kolom 2</th>
+                <th class="px-4 py-2 bg-gray-200">Kolom 3</th>
+                <th class="px-4 py-2 bg-gray-200">Kolom 1</th>
+                <th class="px-4 py-2 bg-gray-200">Kolom 2</th>
+                <th class="px-4 py-2 bg-gray-200">Kolom 3</th>
+                <th class="px-4 py-2 bg-gray-200">Kolom 1</th>
+                <th class="px-4 py-2 bg-gray-200">Kolom 2</th>
+                <th class="px-4 py-2 bg-gray-200">Kolom 3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="px-4 py-2">Data 1A</td>
+                <td class="px-4 py-2">Data 1B</td>
+                <td class="px-4 py-2">Data 1C</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-2">Data 2A</td>
+                <td class="px-4 py-2">Data 2B</td>
+                <td class="px-4 py-2">Data 2C</td>
+              </tr>
+            </tbody>
+          </table> -->
+        </div>
+      </main>
     </div>
     <script src="scripts.js"></script>
-    <!-- Script For Electron (comment this if want to run html only) -->
-    <!-- <script src="renderer.js"></script> -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
   </body>
 </html>
