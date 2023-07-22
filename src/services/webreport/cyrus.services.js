@@ -6,10 +6,12 @@ const getCookieWeb = async () => {
     "https://cyrusku.cyruspad.com/customerh2h/login.asp"
   );
   const setCookieHeader = response.headers["set-cookie"];
-  
+
   if (!setCookieHeader) throw new Error("CYRUS_GET_COOKIE_FAILED");
 
-  const matchesCookie = setCookieHeader[0].match(/ASPSESSIONIDCQETQBRQ=([^;]+)/);
+  const matchesCookie = setCookieHeader[0].match(
+    /ASPSESSIONIDCQETQBRQ=([^;]+)/
+  );
 
   if (!matchesCookie) throw new Error("CYRUS_MATCHING_COOKIE_FAILED");
 
@@ -17,7 +19,7 @@ const getCookieWeb = async () => {
   return sessionId;
 };
 
-const postLoginWeb = async (cookie) => {
+const postLoginWeb = async (cookie, username, password) => {
   const data = qs.stringify({ username, password });
 
   const config = {
