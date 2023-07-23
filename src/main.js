@@ -2,12 +2,15 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const packageJson = require("../package.json");
 const path = require("path");
 const dbServices = require("./services/database/sqlite.services");
+
 const handleGamaForm = require("./services/login/gamma");
 const handlePlusLink = require("./services/login/pluslink");
 const handleHotspotReload = require("./services/login/hotspotReload");
 const handleMonitoringBsi = require("./services/login/monitoringBsi");
 const handleKopnus = require("./services/login/kopnus");
 const handleCyrus = require("./services/login/cyrus");
+
+const handleHotspotGetPriceLists = require("./services/priceLists/hotspot");
 
 const logConsoleOutput = (electronMainProc) => {
   const { stdout, stderr } = process;
@@ -61,6 +64,13 @@ const createWindow = () => {
   ipcMain.on("req-login-status", async () => {
     const resultLists = await dbServices.readAllLists();
     mainWindow.send("res-login-status", resultLists);
+  });
+
+  ipcMain.on("req-price-lists", async (event, data) => {
+    console.log(data);
+    handleHotspotGetPriceLists(data.name);
+    const resultPriceLists = [];
+    mainWindow.send("res-price-lists", resultPriceLists);
   });
 
   mainWindow.loadFile(path.join(__dirname, "../public/index.html"));

@@ -12,6 +12,14 @@ contextBridge.exposeInMainWorld("electronAPI", {
       callback(loginStatus)
     });
   },
+  reqPriceLists: (name) => {
+    ipcRenderer.send("req-price-lists", name);
+  },
+  resPriceLists: (callback) => {
+    ipcRenderer.on("res-price-lists", (_, priceLists) => {
+      callback(priceLists);
+    });
+  },
   onLoginSuccess: (callback) => {
     ipcRenderer.on("login-success", (_, loginIdentity) => {
       callback(loginIdentity);

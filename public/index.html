@@ -41,11 +41,11 @@
             <ul>
               <li class="nav-item">
                 <a
-                  class="uppercase flex items-center text-center py-2 px-2"
+                  class="uppercase flex items-center text-center py-2 px-2 bg-lime-500"
                   href="#analytics">
                   <span>
                     <svg
-                      fill="rgb(163 230 53)"
+                      fill="rgb(255 255 255)"
                       width="32px"
                       height="32px"
                       viewBox="0 0 36 36"
@@ -66,21 +66,21 @@
                   </span>
                   <span
                     :class="sidebarOpen ? 'block' : 'hidden'"
-                    class="mx-3 text-neutral-500 transition-all duration-500"
+                    class="mx-3 text-white transition-all duration-500"
                     >analytics</span
                   >
                 </a>
               </li>
               <li class="nav-item">
                 <a
-                  class="uppercase flex items-center text-center py-2 px-2 bg-lime-500"
+                  class="uppercase flex items-center text-center py-2 px-2"
                   href="#login">
                   <span>
                     <svg
                       width="32px"
                       height="32px"
                       viewBox="0 0 1024 1024"
-                      fill="rgb(255 255 255)"
+                      fill="rgb(163 230 53)"
                       xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M628.736 528.896A416 416 0 0 1 928 928H96a415.872 415.872 0 0 1 299.264-399.104L512 704l116.736-175.104zM720 304a208 208 0 1 1-416 0 208 208 0 0 1 416 0z" />
@@ -88,7 +88,7 @@
                   </span>
                   <span
                     :class="sidebarOpen ? 'block' : 'hidden'"
-                    class="mx-3 text-white transition-all duration-500 transition-all duration-500"
+                    class="mx-3 text-neutral-500 transition-all duration-500 transition-all duration-500"
                     >login</span
                   >
                 </a>
@@ -126,7 +126,7 @@
         class="flex flex-col flex-grow h-screen overflow-y-auto overflow-x-hidden">
         <div class="p-4">
           <!-- Awal Section Analystics -->
-          <section id="analytics" class="hidden">
+          <section id="analytics" class="">
             <h1
               :class="sidebarOpen? 'text-3xl' : 'text-sm'"
               class="text-black font-bold py-5 px-2 transition-all duration-500">
@@ -138,16 +138,17 @@
               <div
                 class="px-10 py-12 rounded-lg bg-lime-50 mb-6 flex flex-col text-center">
                 <span class="text-2xl">Emoney</span>
-                <span class="mt-3 font-light text-gray-500">Dana</span>
-                <span class="mt-1 font-light text-gray-500">Shopee</span>
-                <span class="mt-1 font-light text-gray-500">Ovo</span>
-                <span class="mt-1 font-light text-gray-500">Gopay</span>
-                <span class="mt-1 font-light text-gray-500">Linkaja</span>
+                <span
+                  class="mt-3 font-light text-gray-500 border-transparent cursor-pointer hover:font-bold transition-all duration-200 sorting"
+                  >Dana</span
+                >
               </div>
               <div
                 class="px-10 py-12 rounded-lg bg-lime-50 mb-6 flex flex-col text-center">
                 <span class="text-2xl">Paket Data</span>
-                <span class="mt-3 font-light text-gray-500">Indosat</span>
+                <span class="mt-3 font-light text-gray-500 sorting"
+                  >Indosat</span
+                >
                 <span class="mt-1 font-light text-gray-500">Telkomsel</span>
                 <span class="mt-1 font-light text-gray-500">Three</span>
                 <span class="mt-1 font-light text-gray-500">Smart</span>
@@ -174,15 +175,15 @@
             <table class="w-full table-auto">
               <thead>
                 <tr>
-                  <th class="px-4 py-2 bg-gray-200">Nama</th>
-                  <th class="px-4 py-2 bg-gray-200">Web 1</th>
-                  <th class="px-4 py-2 bg-gray-200">Web 2</th>
-                  <th class="px-4 py-2 bg-gray-200">Web 3</th>
-                  <th class="px-4 py-2 bg-gray-200">Web 4</th>
-                  <th class="px-4 py-2 bg-gray-200">Web 5</th>
-                  <th class="px-4 py-2 bg-gray-200">Web 6</th>
-                  <th class="px-4 py-2 bg-gray-200">Web 7</th>
-                  <th class="px-4 py-2 bg-gray-200">Web 8</th>
+                  <th class="px-4 py-2 bg-gray-200 uppercase">nama</th>
+                  <th class="px-4 py-2 bg-gray-200 uppercase">hotspot</th>
+                  <th class="px-4 py-2 bg-gray-200 uppercase">kopnus</th>
+                  <th class="px-4 py-2 bg-gray-200 uppercase">bsi</th>
+                  <th class="px-4 py-2 bg-gray-200 uppercase">pluslink</th>
+                  <th class="px-4 py-2 bg-gray-200 uppercase">gamma</th>
+                  <th class="px-4 py-2 bg-gray-200 uppercase">cyrus</th>
+                  <!-- <th class="px-4 py-2 bg-gray-200 uppercase">Web 7</th> -->
+                  <!-- <th class="px-4 py-2 bg-gray-200 uppercase">Web 8</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -269,7 +270,7 @@
           <!-- Akhir Section Analystics -->
 
           <!-- Awal Section Login -->
-          <section id="login" class="">
+          <section id="login" class="hidden">
             <h1
               :class="sidebarOpen? 'text-3xl' : 'text-sm'"
               class="text-black font-bold py-5 px-2 transition-all duration-500">
@@ -291,14 +292,16 @@
                       <input
                         type="text"
                         name="username"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
                       <input
                         type="password"
                         name="password"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <button
                       type="submit"
@@ -325,14 +328,16 @@
                       <input
                         type="text"
                         name="username"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
                       <input
                         type="password"
                         name="password"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <button
                       type="submit"
@@ -359,14 +364,16 @@
                       <input
                         type="text"
                         name="username"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
                       <input
                         type="password"
                         name="password"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <button
                       type="submit"
@@ -393,14 +400,16 @@
                       <input
                         type="text"
                         name="username"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
                       <input
                         type="password"
                         name="password"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <button
                       type="submit"
@@ -427,14 +436,16 @@
                       <input
                         type="text"
                         name="username"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
                       <input
                         type="password"
                         name="password"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <button
                       type="submit"
@@ -461,14 +472,16 @@
                       <input
                         type="text"
                         name="username"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
                       <input
                         type="password"
                         name="password"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <button
                       type="submit"
@@ -495,14 +508,16 @@
                       <input
                         type="text"
                         name="username"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
                       <input
                         type="password"
                         name="password"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <button
                       type="submit"
@@ -529,14 +544,16 @@
                       <input
                         type="text"
                         name="username"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
                       <input
                         type="password"
                         name="password"
-                        class="border rounded outline-none py-1 px-2" />
+                        class="border rounded outline-none py-1 px-2"
+                        required />
                     </div>
                     <button
                       type="submit"
@@ -590,6 +607,7 @@
       </main>
       <!-- Akhir Main Content -->
     </div>
+    <script src="analytics.js"></script>
     <script src="login.js"></script>
     <script src="logs.js"></script>
     <script src="navigation.js"></script>

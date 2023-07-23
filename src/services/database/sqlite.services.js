@@ -57,10 +57,30 @@ const readAllLists = async () => {
   return lists;
 };
 
+const readAuthByListId = async (listId) => {
+  await checkAndCreateAllTable();
+  const db = await AsyncDatabase.open(databasePath);
+  const querySelect = `SELECT * FROM auth WHERE id_list = ${listId}`;
+  const auth = await db.get(querySelect);
+  db.close();
+  return auth;
+};
+
+const updateAuthByListId = async (listId, token) => {
+  await checkAndCreateAllTable();
+  const db = await AsyncDatabase.open(databasePath);
+  const queryUpdate = `UPDATE auth SET token = '${token}' WHERE id_list = ${listId}`;
+  const updatedAuth = await db.run(queryUpdate);
+  db.close();
+  return updatedAuth;
+};
+
 module.exports = {
   createLists,
   createAuth,
   readListByTitle,
   updateListStatus,
-  readAllLists
+  readAllLists,
+  readAuthByListId,
+  updateAuthByListId,
 };

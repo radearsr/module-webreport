@@ -24,6 +24,9 @@ const handleCreateLogging = (time, level, message) => {
 electronAPI.onSystemLogging((data) => {
   const MAX_LOGGING = 100;
   const [time, level, message] = data.split("&-&");
+  if (!time ||!level ||!message) {
+    return;
+  }
   const tr = handleCreateLogging(time, level, message);
   const logContents = document.querySelectorAll("#logging-table > tr");
   const tbody = document.getElementById("logging-table"); 
