@@ -5,8 +5,10 @@ const databasePath = path.join(__dirname, "webreport.db");
 
 const checkAndCreateAllTable = async () => {
   const db = await AsyncDatabase.open(databasePath);
-  const createTableAuth = "CREATE TABLE IF NOT EXISTS auth (id INTEGER PRIMARY KEY AUTOINCREMENT, id_list INTEGER, token TEXT)";
-  const createTableList = "CREATE TABLE IF NOT EXISTS lists (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(100), username VARCHAR(100), password VARCHAR(100), status BOOLEAN DEFAULT FALSE)";
+  const createTableAuth =
+    "CREATE TABLE IF NOT EXISTS auth (id INTEGER PRIMARY KEY AUTOINCREMENT, id_list INTEGER, token TEXT)";
+  const createTableList =
+    "CREATE TABLE IF NOT EXISTS lists (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(100), username VARCHAR(100), password VARCHAR(100), status BOOLEAN DEFAULT FALSE)";
   await db.run(createTableAuth);
   await db.run(createTableList);
   db.close();

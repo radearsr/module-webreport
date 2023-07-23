@@ -19,6 +19,7 @@ const postLoginWeb = async (username, password) => {
 };
 
 const getPriceLists = async (token) => {
+  console.log(token);
   const config = {
     method: "get",
     url: "https://report.pluslinkcorp.com/data/api/list-product/6/3",
@@ -35,3 +36,10 @@ module.exports = {
   postLoginWeb,
   getPriceLists,
 };
+// const loginWeb = async () => {
+//   const getToekn = await postLoginWeb("HH77356", "Unitedtronik.17*");
+//   const result = await getPriceLists(getToekn.token);
+//   console.log(result);
+// };
+
+// loginWeb();
