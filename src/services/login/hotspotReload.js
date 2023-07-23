@@ -11,6 +11,7 @@ const handleHotspotReloadLogin = async (title, data, electronMainProccess) => {
       await dbService.createLists(title, username, password);
     }
     const list = await dbService.readListByTitle(title);
+    loggingService.showLogging("WARN", JSON.stringify(list));
     if (list.status) {
       return electronMainProccess.send("login-success", {
         formId: title,
@@ -25,7 +26,8 @@ const handleHotspotReloadLogin = async (title, data, electronMainProccess) => {
       formId: title,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    loggingService.showLogging("ERROR", error.stack);
   }
 };
 
