@@ -1,4 +1,4 @@
-const webReportService = require("../webreport/hotspotReload.services");
+const { postLoginWeb } = require("../webreport/hotspotReload.services");
 const dbService = require("../database/sqlite.services");
 const loggingService = require("../../utils/logging/logging.utils");
 
@@ -17,7 +17,7 @@ const handleHotspotReloadLogin = async (title, data, electronMainProccess) => {
         formId: title,
       });
     }
-    const loginResponse = await webReportService.postLoginWeb(username, password);
+    const loginResponse = await postLoginWeb(username, password);
     const token = loginResponse?.token;
     if (!token) throw new Error("INVALID_TOKEN");
     await dbService.createAuth(list.id, token);

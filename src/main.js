@@ -44,17 +44,17 @@ const createWindow = () => {
   ipcMain.on("form-data", async (event, data) => {
     const { formId } = data;
     if (formId === "gamma") {
-      await handleGamaForm(event, data, mainWindow);
+      await handleGamaForm(formId, data, mainWindow);
     } else if (formId === "pluslink") {
-      await handlePlusLink(event, data, mainWindow);
+      await handlePlusLink(formId, data, mainWindow);
     } else if (formId === "hotspot") {
       await handleHotspotReload(formId, data, mainWindow);
     } else if (formId === "monitoringBsi") {
-      await handleMonitoringBsi(event, data, mainWindow);
+      await handleMonitoringBsi(formId, data, mainWindow);
     } else if (formId === "kopnus") {
-      await handleKopnus(event, data, mainWindow);
+      await handleKopnus(formId, data, mainWindow);
     } else if (formId === "cyrus") {
-      await handleCyrus(event, data);
+      await handleCyrus(formId, data, mainWindow);
     }
   });
 

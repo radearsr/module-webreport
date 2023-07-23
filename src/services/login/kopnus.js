@@ -1,21 +1,34 @@
-const { postLoginWeb, getPriceLists } = require("../webreport/kopNus.services");
+const { postLoginWeb } = require("../webreport/kopNus.services");
+const dbService = require("../database/sqlite.services");
+const loggingService = require("../../utils/logging/logging.utils");
 
-const handleKopnus = async (event, data, elecktronMainProccess) => {
+const handleKopnus = async (title, data, electronMainProccess) => {
   const { username, password } = data;
   try {
+    loggingService.showLogging("INFO", JSON.stringify(data));
+    const availableLists = await dbService.readListByTitle(title);
+    if (!availableLists) {
+      await dbService.createLists(title, username, password);
+    }
+    const list = await dbService.readListByTitle(title);
+    loggingService.showLogging("WARN", JSON.stringify(list));
+    if (list.status) {
+      return electronMainProccess.send("login-success", {
+        formId: title,
+      });
+    }
     const loginResponse = await postLoginWeb(username, password);
-    console.log(loginResponse);
-    const token = loginResponse.token;
-    console.log(token);
-    const priceListsResponse = await getPriceLists(token);
-    console.log(priceListsResponse);
-    elecktronMainProccess.send("price-lists", priceListsResponse);
+    loggingService.showLogging("INFO", JSON.stringify(loginResponse));
+    const token = loginResponse?.token;
+    if (!token) throw new Error("INVALID_TOKEN");
+    await dbService.createAuth(list.id, token);
+    await dbService.updateListStatus(list.id, true);
+    electronMainProccess.send("login-success", {
+      formId: title,
+    });
   } catch (error) {
-    console.error("Login atau pengambilan data daftar harga gagal:", error);
-    event.sender.send(
-      "error",
-      "Login atau pengambilan data daftar harga gagal"
-    );
+    console.error(error);
+    loggingService.showLogging("ERROR", error.stack);
   }
 };
 

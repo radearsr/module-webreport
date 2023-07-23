@@ -1,6 +1,6 @@
 const handleCreateLogging = (time, level, message) => {
   const bgLevel = {
-    "DEBUG": "bg-gray-200",
+    "LOG": "bg-gray-200",
     "INFO": "bg-blue-200",
     "WARN": "bg-yellow-200",
     "ERROR": "bg-red-200"
@@ -8,10 +8,13 @@ const handleCreateLogging = (time, level, message) => {
   const tr = document.createElement("tr");
   const tdTime = document.createElement("td");
   const tdMessage = document.createElement("td");
+  const contentMessage = document.createElement("p");
   tdTime.textContent = `-> ${time}`;
-  tdMessage.textContent = message;
+  contentMessage.textContent = message;
   tdTime.setAttribute("class", "w-1/5 px-2");
   tdMessage.setAttribute("class", "w-4/5 px-2 py-2");
+  contentMessage.setAttribute("class", "break-all");
+  tdMessage.appendChild(contentMessage);
   tr.setAttribute("class", `${bgLevel[level]} border-b-2 border-neutral-600`);
   tr.appendChild(tdTime);
   tr.appendChild(tdMessage);
