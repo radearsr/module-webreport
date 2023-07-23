@@ -21,6 +21,14 @@ const sortingPriceListByName = async (name) => {
     return resultMapped;
   } catch (error) {
     loggingUtils.showLogging("ERROR", error.stack);
+    if (error.response && error.response.status === 401) {
+      try {
+        const list = await dbService.readListByTitle("gamma");
+        await dbService.updateListStatus(list.id, false);
+      } catch (dbError) {
+        loggingUtils.showLogging("ERROR", dbError.stack);
+      }
+    }
   }
 };
 

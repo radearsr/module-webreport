@@ -71,16 +71,16 @@ const createWindow = () => {
   });
 
   ipcMain.on("req-price-lists", async (event, data) => {
-    // const gammaPrice = await handleGammaGetPriceLists(data);
-    // const hotspotPrice = await handleHotspotGetPriceLists(data);
-    // const kopnusPrice = await handleKopnusGetPriceLists(data);
-    // const pluslinkPrice = await handlePluslinkGetPriceLists(data);
+    const gammaPrice = await handleGammaGetPriceLists(data);
+    const hotspotPrice = await handleHotspotGetPriceLists(data);
+    const kopnusPrice = await handleKopnusGetPriceLists(data);
+    const pluslinkPrice = await handlePluslinkGetPriceLists(data);
     const monitoringBsiPrice = await handleMonitoringBsiGetPriceLists(data);
     const resultPriceLists = {
-      // hotspotPrice,
-      // kopnusPrice,
-      // gammaPrice,
-      // pluslinkPrice,
+      hotspotPrice,
+      kopnusPrice,
+      gammaPrice,
+      pluslinkPrice,
       monitoringBsiPrice,
     };
     mainWindow.send("res-price-lists", resultPriceLists);

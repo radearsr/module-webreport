@@ -62,6 +62,14 @@ const sortingPriceListByName = async (name) => {
     }
   } catch (error) {
     loggingUtils.showLogging("ERROR", error.stack);
+    if (error.response && error.response.status === 401) {
+      try {
+        const list = await dbService.readListByTitle("pluslink");
+        await dbService.updateListStatus(list.id, false);
+      } catch (dbError) {
+        loggingUtils.showLogging("ERROR", dbError.stack);
+      }
+    }
   }
 };
 
