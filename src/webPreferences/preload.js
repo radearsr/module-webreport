@@ -17,6 +17,11 @@ contextBridge.exposeInMainWorld("electronAPI", {
       callback(loginIdentity);
     });
   },
+  onSystemLogging: (callback) => {
+    ipcRenderer.on("system-logging", (_, systemLogging) => {
+      callback(systemLogging);
+    });
+  }, 
   onError: (callback) => {
     ipcRenderer.on("error", (_, errorMessage) => {
       callback(errorMessage);

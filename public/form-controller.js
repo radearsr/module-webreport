@@ -26,10 +26,6 @@ electronAPI.onLoginSuccess((data) => {
   statusBullet.classList.add("bg-lime-500");
 });
 
-window.addEventListener("DOMContentLoaded", () => {
-  electronAPI.reqLoginStatus();
-});
-
 electronAPI.resLoginStatus((lists) => {
   if (lists.length < 1) return false;
   lists.forEach((list) => {

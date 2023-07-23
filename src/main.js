@@ -9,6 +9,24 @@ const handleMonitoringBsi = require("./services/login/monitoringBsi");
 const handleKopnus = require("./services/login/kopnus");
 const handleCyrus = require("./services/login/cyrus");
 
+const logConsoleOutput = (electronMainProc) => {
+  const { stdout, stderr } = process;
+
+  const originalStdoutWrite = stdout.write.bind(stdout);
+  const originalStderrWrite = stderr.write.bind(stderr);
+
+  stdout.write = (...args) => {
+    setTimeout(() => {
+      electronMainProc.send("system-logging", args[0]);
+    }, 100);
+    originalStdoutWrite(...args);
+  };
+
+  stderr.write = (...args) => {
+    originalStderrWrite(...args);
+  };
+};
+
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
     title: `Module Web Reports v${packageJson.version}`,
@@ -18,6 +36,8 @@ const createWindow = () => {
       preload: path.join(__dirname, "./webPreferences/preload.js"),
     },
   });
+
+  logConsoleOutput(mainWindow);
 
   mainWindow.webContents.openDevTools();
 

@@ -558,7 +558,8 @@
               class="text-black font-bold py-5 px-2 transition-all duration-500">
               Logs
             </h1>
-            <table class="border-collapse">
+            <table
+              class="border-spacing-4 w-full border-b-2 border-neutral-950">
               <thead class="sticky top-0 bg-lime-200">
                 <tr>
                   <th
@@ -571,8 +572,8 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr class="bg-red-400">
+              <tbody id="logging-table">
+                <!-- <tr class="bg-red-400 border-b-2 border-neutral-950">
                   <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
                   <td class="w-4/5 px-2 py-2">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -580,286 +581,7 @@
                     aperiam vero repellat dolore. Temporibus tempore nobis
                     nulla. Commodi, illum fuga! Amet velit iure earum?
                   </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr class="bg-red-400">
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
-                <tr>
-                  <td class="w-1/5 px-2">-> 7/21/2023 8:34:12 PM</td>
-                  <td class="w-4/5 px-2 py-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Optio atque veniam accusamus harum necessitatibus qui
-                    aperiam vero repellat dolore. Temporibus tempore nobis
-                    nulla. Commodi, illum fuga! Amet velit iure earum?
-                  </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </section>
@@ -868,10 +590,11 @@
       </main>
       <!-- Akhir Main Content -->
     </div>
+    <script src="logs.js"></script>
     <script src="form-controller.js"></script>
     <script src="navigation.js"></script>
-    <script src="scripts.js"></script>
     <script src="alpinejs.js"></script>
+    <script src="scripts.js"></script>
     <!-- <script src="./renderer.js"></script> -->
   </body>
 </html>
