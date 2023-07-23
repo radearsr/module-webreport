@@ -9,30 +9,34 @@ const handleKopnus = require("./services/login/kopnus");
 const handleCyrus = require("./services/login/cyrus");
 
 const createWindow = () => {
-  const elecktronMainProccess = new BrowserWindow({
+  const mainWindow = new BrowserWindow({
     title: `Module Web Reports v${packageJson.version}`,
     autoHideMenuBar: true,
+    fullscreen: true,
     webPreferences: {
       preload: path.join(__dirname, "./webPreferences/preload.js"),
     },
   });
+
+  mainWindow.webContents.openDevTools();
+
   ipcMain.on("form-data", async (event, data) => {
     const { formId } = data;
     if (formId === "gamma") {
-      await handleGamaForm(event, data, elecktronMainProccess);
+      await handleGamaForm(event, data, mainWindow);
     } else if (formId === "pluslink") {
-      await handlePlusLink(event, data, elecktronMainProccess);
+      await handlePlusLink(event, data, mainWindow);
     } else if (formId === "hotspot") {
-      await handleHotspotReload(event, data, elecktronMainProccess);
+      await handleHotspotReload(formId, data, mainWindow);
     } else if (formId === "monitoringBsi") {
-      await handleMonitoringBsi(event, data, elecktronMainProccess);
+      await handleMonitoringBsi(event, data, mainWindow);
     } else if (formId === "kopnus") {
-      await handleKopnus(event, data, elecktronMainProccess);
+      await handleKopnus(event, data, mainWindow);
     } else if (formId === "cyrus") {
       await handleCyrus(event, data);
     }
   });
-  elecktronMainProccess.loadFile(path.join(__dirname, "../public/index.html"));
+  mainWindow.loadFile(path.join(__dirname, "../public/index.html"));
 };
 
 app.whenReady().then(() => {

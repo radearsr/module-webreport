@@ -1,24 +1,25 @@
-const {
-  postLoginWeb,
-  getPriceLists,
-} = require("../webreport/hotspotReload.services");
+const webReportService = require("../webreport/hotspotReload.services");
+const dbService = require("../database/sqlite.services");
 
-const handleHotspotReload = async (event, data, elecktronMainProccess) => {
+const handleHotspotReloadLogin = async (title, data, electronMainProccess) => {
   const { username, password } = data;
   try {
-    const loginResponse = await postLoginWeb(username, password);
-    const token = loginResponse.token;
-    console.log(token);
-    const priceListsResponse = await getPriceLists(token);
-    console.log(priceListsResponse);
-    elecktronMainProccess.send("price-lists", priceListsResponse);
+    const loginResponse = await webReportService.postLoginWeb(username, password);
+    const token = loginResponse?.token;
+    if (!token) throw new Error("INVALID_TOKEN");
+    const availableLists = await dbService.readListByTitle(title);
+    if (!availableLists) {
+      await dbService.createLists(title, username, password);
+    }
+    const list = await dbService.readListByTitle(title);
+    await dbService.createAuth(list.id, token);
+    await dbService.updateListStatus(list.id, true);
+    electronMainProccess.send("login-success", {
+      formId: title,
+    });
   } catch (error) {
-    console.error("Login atau pengambilan data daftar harga gagal:", error);
-    event.sender.send(
-      "error",
-      "Login atau pengambilan data daftar harga gagal"
-    );
+    console.log(error);
   }
 };
 
-module.exports = handleHotspotReload;
+module.exports = handleHotspotReloadLogin;

@@ -25,6 +25,7 @@
     "cheerio": "^1.0.0-rc.12",
     "crypto-js": "^4.1.1",
     "node-fetch": "^3.3.1",
+    "promised-sqlite3": "^2.1.0",
     "puppeteer": "^20.8.2",
     "qs": "^6.11.2",
     "sqlite3": "^5.1.6",

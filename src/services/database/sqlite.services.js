@@ -1,120 +1,56 @@
-const db = require("../../config/db.config");
+const { AsyncDatabase } = require("promised-sqlite3");
+const path = require("path");
 
-const checkAndCreateTableAuth = () => {
-  return new Promise((resolve, reject) => {
-    const query = "CREATE TABLE IF NOT EXISTS auth (id INTEGER PRIMARY KEY AUTOINCREMENT, id_list INTEGER, token TEXT)";
-    db.serialize(() => {
-      db.run(query, (result, error) => {
-        if (!error) {
-          resolve(result);
-        }
-        reject(error);
-      });
-    });
-  });
+const databasePath = path.join(__dirname, "webreport.db");
+
+const checkAndCreateAllTable = async () => {
+  const db = await AsyncDatabase.open(databasePath);
+  const createTableAuth = "CREATE TABLE IF NOT EXISTS auth (id INTEGER PRIMARY KEY AUTOINCREMENT, id_list INTEGER, token TEXT)";
+  const createTableList = "CREATE TABLE IF NOT EXISTS lists (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(100), username VARCHAR(100), password VARCHAR(100), status BOOLEAN DEFAULT FALSE)";
+  await db.run(createTableAuth);
+  await db.run(createTableList);
+  db.close();
 };
 
-const checkAndCreateTableLists = () => {
-  return new Promise((resolve, reject) => {
-    const query = "CREATE TABLE IF NOT EXISTS lists (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(100), username VARCHAR(100), password VARCHAR(100), search VARCHAR(100), status BOOLEAN DEFAULT FALSE)";
-    db.serialize(() => {
-      db.run(query, (result, error) => {
-        if (!error) {
-          resolve(result);
-        }
-        reject(error);
-      });
-    });
-  });
+const createLists = async (title, username, password) => {
+  await checkAndCreateAllTable();
+  const db = await AsyncDatabase.open(databasePath);
+  const queryInsert = `INSERT INTO lists (title, username, password) VALUES ('${title}', '${username}', '${password}')`;
+  const createdList = await db.run(queryInsert);
+  db.close();
+  return createdList;
 };
 
-const createList = (title, username, password, search) => {
-  checkAndCreateTableLists();
-  checkAndCreateTableAuth();
-  return new Promise((resolve, reject) => {
-    const query = `INSERT INTO lists (title, username, password, search) VALUES ('${title}', '${username}', '${password}', '${search}')`;
-    db.serialize(() => {
-      db.all(query, function(error) {
-        db.close();
-        console.log(this);
-        if (!error) {
-          resolve(this);
-        }
-        reject(error);
-      });
-    });
-  }); 
+const readListByTitle = async (title) => {
+  await checkAndCreateAllTable();
+  const db = await AsyncDatabase.open(databasePath);
+  const querySelect = `SELECT * FROM lists WHERE title = '${title}'`;
+  const list = await db.get(querySelect);
+  db.close();
+  return list;
 };
 
-const readLists = () => {
-  checkAndCreateTableLists();
-  return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM lists`;
-    db.serialize(() => {
-      db.all(query, (result, error) => {
-        db.close();
-        if (!error) {
-          resolve(result);
-        }
-        reject(error);
-      });
-    });
-  }); 
+const createAuth = async (listId, token) => {
+  await checkAndCreateAllTable();
+  const db = await AsyncDatabase.open(databasePath);
+  const queryInsert = `INSERT INTO auth (id_list, token) VALUES ('${listId}', '${token}')`;
+  const createdAuth = await db.run(queryInsert);
+  db.close();
+  return createdAuth;
 };
 
-const createAuth = (idList, token) => {
-  checkAndCreateTableLists();
-  checkAndCreateTableAuth();
-  return new Promise((resolve, reject) => {
-    const query = `INSERT INTO auth (id_list, token) VALUES (${idList}, '${token}')`;
-    db.serialize(() => {
-      db.all(query, (result, error) => {
-        db.close();
-        if (!error) {
-          resolve(result);
-        }
-        reject(error);
-      });
-    });
-  });
-};
-
-const readAuthByIdList = (idList) => {
-  checkAndCreateTableAuth();
-  return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM auth WHERE id = ${idList}`;
-    db.serialize(() => {
-      db.all(query, (result, error) => {
-        db.close();
-        if (!error) {
-          resolve(result);
-        }
-        reject(error);
-      });
-    });
-  });
-};
-
-const updateListStatusById = (id, status) => {
-  checkAndCreateTableLists();
-  return new Promise((resolve, reject) => {
-    const query = `UPDATE lists SET status = ${status} WHERE id = ${id}`;
-    db.serialize(() => {
-      db.run(query, (result, error) => {
-        db.close();
-        if (!error) {
-          resolve(result);
-        }
-        reject(error);
-      });
-    });
-  });
+const updateListStatus = async (listId, status) => {
+  await checkAndCreateAllTable();
+  const db = await AsyncDatabase.open(databasePath);
+  const queryUpdate = `UPDATE lists SET status = ${status} WHERE id = ${listId}`;
+  const updatedList = await db.run(queryUpdate);
+  db.close();
+  return updatedList;
 };
 
 module.exports = {
-  createList,
-  readLists,
+  createLists,
   createAuth,
-  readAuthByIdList,
-  updateListStatusById,
+  readListByTitle,
+  updateListStatus,
 };
