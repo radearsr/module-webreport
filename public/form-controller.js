@@ -12,7 +12,7 @@ forms.forEach((form) => {
     const username = formData.get("username");
     const password = formData.get("password");
     try {
-      window.electronAPI.sendFormData({ formId, username, password });
+      electronAPI.sendFormData({ formId, username, password });
     } catch (error) {
       console.error("Gagal mengirim data form melalui IPC:", error);
     }
@@ -20,11 +20,33 @@ forms.forEach((form) => {
 });
 
 electronAPI.onLoginSuccess((data) => {
-  console.log(data);
   const form = document.getElementById(data.formId);
   const statusBullet = form.parentElement.querySelector("span:first-child");
-  console.log(data);
   statusBullet.classList.remove("bg-slate-300");
   statusBullet.classList.add("bg-lime-500");
-  console.log("Login Success");
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  electronAPI.reqLoginStatus();
+});
+
+electronAPI.resLoginStatus((lists) => {
+  if (lists.length < 1) return false;
+  lists.forEach((list) => {
+    let form = document.getElementById(list.title);
+    let username = form.querySelector("input[name='username']");
+    let password = form.querySelector("input[name='password']");
+    let statusBullet = form.parentElement.querySelector("span:first-child");
+
+    username.value = list.username;
+    password.value = list.password;
+
+    if (list.status === 0) {
+      statusBullet.classList.remove("bg-lime-500");
+      statusBullet.classList.add("bg-slate-300");
+    } else {
+      statusBullet.classList.remove("bg-slate-300");
+      statusBullet.classList.add("bg-lime-500");
+    }
+  });
 });

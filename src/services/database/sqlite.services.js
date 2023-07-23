@@ -48,9 +48,19 @@ const updateListStatus = async (listId, status) => {
   return updatedList;
 };
 
+const readAllLists = async () => {
+  await checkAndCreateAllTable();
+  const db = await AsyncDatabase.open(databasePath);
+  const querySelect = "SELECT * FROM lists";
+  const lists = await db.all(querySelect);
+  db.close();
+  return lists;
+};
+
 module.exports = {
   createLists,
   createAuth,
   readListByTitle,
   updateListStatus,
+  readAllLists
 };

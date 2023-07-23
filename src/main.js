@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const packageJson = require("../package.json");
 const path = require("path");
+const dbServices = require("./services/database/sqlite.services");
 const handleGamaForm = require("./services/login/gamma");
 const handlePlusLink = require("./services/login/pluslink");
 const handleHotspotReload = require("./services/login/hotspotReload");
@@ -36,6 +37,12 @@ const createWindow = () => {
       await handleCyrus(event, data);
     }
   });
+
+  ipcMain.on("req-login-status", async () => {
+    const resultLists = await dbServices.readAllLists();
+    mainWindow.send("res-login-status", resultLists);
+  });
+
   mainWindow.loadFile(path.join(__dirname, "../public/index.html"));
 };
 
