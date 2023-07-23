@@ -10,7 +10,8 @@ const handleMonitoringBsi = require("./services/login/monitoringBsi");
 const handleKopnus = require("./services/login/kopnus");
 const handleCyrus = require("./services/login/cyrus");
 
-const handleHotspotGetPriceLists = require("./services/priceLists/hotspot");
+const handleHotspotGetPriceLists = require("./services/priceLists/hotspotReload");
+const handleKopnusGetPriceLists = require("./services/priceLists/kopnus");
 
 const logConsoleOutput = (electronMainProc) => {
   const { stdout, stderr } = process;
@@ -67,9 +68,12 @@ const createWindow = () => {
   });
 
   ipcMain.on("req-price-lists", async (event, data) => {
-    console.log(data);
-    handleHotspotGetPriceLists(data.name);
-    const resultPriceLists = [];
+    const hotspotPrice = await handleHotspotGetPriceLists(data);
+    const kopnusPrice = await handleKopnusGetPriceLists(data);
+    const resultPriceLists = {
+      hotspotPrice,
+      kopnusPrice
+    };
     mainWindow.send("res-price-lists", resultPriceLists);
   });
 
