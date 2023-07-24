@@ -44,7 +44,11 @@ electronAPI.resPriceLists((data) => {
       tbody.appendChild(tr);
       return;
     };
-    console.log(data[tableId]);
+    if (data[tableId].length < 1) {
+      const tr = createTableRowNoContent("Data Tidak Ditemukan");
+      tbody.appendChild(tr);  
+      return;
+    }
     data[tableId].forEach((data) => {
       console.log(data);
       const tr = createTableRow(data.kodeProduk, data.namaProduk, data.harga);
