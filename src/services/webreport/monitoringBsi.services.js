@@ -1,5 +1,6 @@
 const axios = require("axios");
 const utilsMonitoringBsi = require("../../utils/monitoringBsi/monitoringBsi.utils");
+const path = require("path");
 const { applicationId, dsguid, restApiKey } = utilsMonitoringBsi;
 
 const postLoginWeb = async (username, password) => {
@@ -73,7 +74,7 @@ const getPriceLists = async (token, dataAcc) => {
       token: response.data.token,
     };
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
   }
 };
 

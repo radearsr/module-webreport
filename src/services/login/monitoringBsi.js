@@ -21,12 +21,13 @@ const handleMonitoringBsi = async (title, data, electronMainProccess) => {
     loggingService.showLogging("INFO", JSON.stringify(loginResponse));
     const token = loginResponse?.token;
     const dataAcc = loginResponse?.dataAcc;
-    if (!token) throw new Error("INVALID_TOKEN");
+    if (!token || !dataAcc) throw new Error("INVALID_TOKEN");
+    const newTokenFormat = `${token}&-&${dataAcc}`;
     const availableToken = await dbService.readAuthByListId(list.id);
     if (!availableToken) {
-      await dbService.createAuth(list.id, token);
+      await dbService.createAuth(list.id, newTokenFormat);
     }
-    await dbService.updateAuthByListId(list.id, token);
+    await dbService.updateAuthByListId(list.id, newTokenFormat);
     await dbService.updateListStatus(list.id, true);
     electronMainProccess.send("login-success", {
       formId: title,

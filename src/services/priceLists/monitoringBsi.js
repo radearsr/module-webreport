@@ -9,12 +9,18 @@ const sortingPriceListByName = async (name) => {
   try {
     const list = await dbService.readListByTitle("monitoringBsi");
     if (!list) throw new Error("MONITORINGBSI_LIST_NOT_FOUND");
-    // const auth = await dbService.readAuthByListId(list.id);
-    const { token, dataAcc } = await postLoginWeb("pmk", "pmk123");
+    const auth = await dbService.readAuthByListId(list.id);
+    const [token, dataAcc] = auth.token.split("&-&");
     const priceLists = await getPriceLists(token, dataAcc);
-    if (!priceLists) {
+    
+    if (!priceLists?.token) {
       await dbService.updateListStatus(list.id, false);
     }
+    
+    if (!priceLists?.data) throw new Error("MONITORINGBSI_DATA_NOT_FOUND");
+
+    const newTokenFormat = `${priceLists.token}&-&${dataAcc}`;
+    await dbService.updateAuthByListId(list.id, newTokenFormat);
     const getDataPrice = priceLists.data;
     const keyword = name.toLowerCase();
     const resultMapped = [];
