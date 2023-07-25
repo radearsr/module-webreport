@@ -13,8 +13,9 @@ const sortingPriceListByName = async (name) => {
     if (priceLists.msg === "Unauthorize") {
       await dbService.updateListStatus(list.id, false);
     }
+
+    // Gopay Product
     if (keyword === "gopay") {
-      // Gopay Product
       const result = priceLists.pulsa.find((data) =>
         data.namaoperator.includes("GOJEK")
       );
@@ -26,8 +27,9 @@ const sortingPriceListByName = async (name) => {
       }));
 
       return resultMapped;
-    } else if (keyword === "three") {
+
       // Three Product
+    } else if (keyword === "three") {
       const result = priceLists.pulsa.find((data) =>
         data.namaoperator.includes("TRI")
       );
@@ -39,18 +41,44 @@ const sortingPriceListByName = async (name) => {
       }));
 
       return resultMapped;
+
+      // Binding Product
     } else if (
       keyword === "shopee" ||
       keyword === "gopay" ||
       keyword === "indosat" ||
       keyword === "telkomsel" ||
-      keyword === "xl"
+      keyword === "xl" ||
+      keyword === "game" ||
+      keyword === "ppob"
     ) {
-      // Shopee & Gopay Product
-      const resultFiltered = priceLists.pulsa.filter((data) =>
-        data.namaoperator.toLowerCase().includes(keyword)
-      );
-      const allDatas = []
+      let resultFiltered;
+
+      //Game Product
+      if (keyword === "game") {
+        resultFiltered = priceLists.game.filter((data) =>
+          data.namaoperator.toLowerCase().includes(keyword)
+        );
+
+        // PPOB Product
+      } else if (keyword === "ppob") {
+        resultFiltered = priceLists.ppob.filter(
+          (data) =>
+            data.namaoperator.toLowerCase().includes("hp pasca") ||
+            data.namaoperator.toLowerCase().includes("multi finance") ||
+            data.namaoperator.toLowerCase().includes("pdam new") ||
+            data.namaoperator.toLowerCase().includes("telkom") ||
+            data.namaoperator.toLowerCase().includes("ppob")
+        );
+
+        // Pulsa Product
+      } else {
+        resultFiltered = priceLists.pulsa.filter((data) =>
+          data.namaoperator.toLowerCase().includes(keyword)
+        );
+      }
+
+      const allDatas = [];
       resultFiltered.forEach((result) => {
         result.data.forEach((data) => {
           allDatas.push({
@@ -63,7 +91,6 @@ const sortingPriceListByName = async (name) => {
       return allDatas;
     } else {
       // All Product
-      console.log("HOTSPOTRELOAD ELSE");
       const resultIndex = priceLists.pulsa.findIndex((data) =>
         data.namaoperator.toLowerCase().includes(keyword)
       );

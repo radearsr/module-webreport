@@ -26,6 +26,8 @@ const sortingPriceListByName = async (name) => {
       }));
 
       return resultMapped;
+
+      // Binding Product
     } else if (
       keyword === "shopee" ||
       keyword === "gopay" ||
@@ -33,14 +35,14 @@ const sortingPriceListByName = async (name) => {
       keyword === "telkomsel" ||
       keyword === "three" ||
       keyword === "smart" ||
-      keyword === "xl"
+      keyword === "xl" ||
+      keyword === "game"
     ) {
-      // Shopee & Gopay Product
       const resultFiltered = priceLists.pulsa.filter((data) =>
         data.namaoperator.toLowerCase().includes(keyword)
       );
 
-      const allDatas = []
+      const allDatas = [];
       resultFiltered.forEach((result) => {
         result.data.forEach((data) => {
           allDatas.push({
@@ -51,8 +53,9 @@ const sortingPriceListByName = async (name) => {
         });
       });
       return allDatas;
-    } else {
+
       // ALL product
+    } else {
       const resultIndex = priceLists.pulsa.findIndex((data) =>
         data.namaoperator.toLowerCase().includes(keyword)
       );

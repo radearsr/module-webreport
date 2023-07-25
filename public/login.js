@@ -3,7 +3,7 @@ const forms = document.querySelectorAll("form");
 forms.forEach((form) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    
+
     const buttonSubmit = form.parentElement.querySelector(
       "button[type='submit']"
     );
@@ -22,8 +22,13 @@ forms.forEach((form) => {
 electronAPI.onLoginSuccess((data) => {
   const form = document.getElementById(data.formId);
   const statusBullet = form.parentElement.querySelector("span:first-child");
+  const buttonElement = form.querySelector("#loginButton");
   statusBullet.classList.remove("bg-slate-300");
   statusBullet.classList.add("bg-lime-500");
+  buttonElement.classList.remove("bg-slate-300");
+  buttonElement.classList.add("bg-lime-500");
+  buttonElement.classList.add("disabled");
+  buttonElement.disabled = true;
 });
 
 electronAPI.resLoginStatus((lists) => {
@@ -33,6 +38,7 @@ electronAPI.resLoginStatus((lists) => {
     let username = form.querySelector("input[name='username']");
     let password = form.querySelector("input[name='password']");
     let statusBullet = form.parentElement.querySelector("span:first-child");
+    let buttonElement = form.querySelector("#loginButton");
 
     username.value = list.username;
     password.value = list.password;
@@ -40,9 +46,17 @@ electronAPI.resLoginStatus((lists) => {
     if (list.status === 0) {
       statusBullet.classList.remove("bg-lime-500");
       statusBullet.classList.add("bg-slate-300");
+      buttonElement.classList.remove("bg-lime-500");
+      buttonElement.classList.add("bg-slate-300");
+      buttonElement.classList.remove("disabled");
+      buttonElement.disabled = false;
     } else {
       statusBullet.classList.remove("bg-slate-300");
       statusBullet.classList.add("bg-lime-500");
+      buttonElement.classList.remove("bg-slate-300");
+      buttonElement.classList.add("bg-lime-500");
+      buttonElement.classList.add("disabled");
+      buttonElement.disabled = true;
     }
   });
 });

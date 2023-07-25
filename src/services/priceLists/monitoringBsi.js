@@ -12,7 +12,7 @@ const sortingPriceListByName = async (name) => {
     const auth = await dbService.readAuthByListId(list.id);
     const [token, dataAcc] = auth.token.split("&-&");
     const priceLists = await getPriceLists(token, dataAcc);
-    
+
     if (!priceLists?.token) {
       await dbService.updateListStatus(list.id, false);
       return;
@@ -23,19 +23,51 @@ const sortingPriceListByName = async (name) => {
     const newTokenFormat = `${priceLists.token}&-&${dataAcc}`;
     await dbService.updateAuthByListId(list.id, newTokenFormat);
     const getDataPrice = priceLists.data;
-    const keyword = name.toLowerCase();
+    let keyword = name.toLowerCase();
     const resultMapped = [];
 
-    for (const produk of getDataPrice) {
-      if (produk.nama_produk.toLowerCase().includes(keyword)) {
-        resultMapped.push({
-          kodeProduk: produk.kode_produk,
-          namaProduk: produk.nama_produk,
-          harga: produk.harga_jual,
-        });
+    // Game Product
+    if (keyword === "game") {
+      for (const produk of getDataPrice) {
+        if (
+          produk.nama_produk.toLowerCase().includes("ml") ||
+          produk.nama_produk.toLowerCase().includes("free")
+        ) {
+          resultMapped.push({
+            kodeProduk: produk.kode_produk,
+            namaProduk: produk.nama_produk,
+            harga: produk.harga_jual,
+          });
+        }
       }
+      return resultMapped;
+
+      // Byu Product
+    } else if (keyword === "byu") {
+      for (const produk of getDataPrice) {
+        if (produk.nama_produk.toLowerCase().includes("by")) {
+          resultMapped.push({
+            kodeProduk: produk.kode_produk,
+            namaProduk: produk.nama_produk,
+            harga: produk.harga_jual,
+          });
+        }
+      }
+      return resultMapped;
+
+      // All Product
+    } else {
+      for (const produk of getDataPrice) {
+        if (produk.nama_produk.toLowerCase().includes(keyword)) {
+          resultMapped.push({
+            kodeProduk: produk.kode_produk,
+            namaProduk: produk.nama_produk,
+            harga: produk.harga_jual,
+          });
+        }
+      }
+      return resultMapped;
     }
-    return resultMapped;
   } catch (error) {
     if (error.message === "MONITORINGBSI_DATA_NOT_FOUND") {
       loggingUtils.showLogging("ERROR", error.message);

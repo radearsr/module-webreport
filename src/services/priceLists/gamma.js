@@ -9,19 +9,39 @@ const sortingPriceListByName = async (name) => {
     const auth = await dbService.readAuthByListId(list.id);
     const priceLists = await getPriceLists(auth.token);
     const getDataPrice = priceLists.data.body;
-    const keyword = name.toLowerCase();
+    let keyword = name.toLowerCase();
+
+    // Game Product
+    if (keyword === "game") {
+      keyword = "topup";
+      // PPOB Product
+    } else if (keyword === "ppob") {
+      keyword = "pln";
+    }
+
+    // All Product
     const result = getDataPrice.filter((data) =>
       data.category_name.toLowerCase().includes(keyword)
     );
+    if (result.length === 0) {
+      throw new Error("GAMMA_DATA_NOT_FOUND");
+    }
+
     const resultMapped = result.map((data) => ({
       kodeProduk: data.product_alias,
       namaProduk: data.product_name,
       harga: data.jpp_sellprice,
     }));
+
     return resultMapped;
   } catch (error) {
-    loggingUtils.showLogging("ERROR", error.stack);
-    if (error.response && error.response.status === 401) {
+    // Error Product NotFound
+    if (error.message === "GAMMA_DATA_NOT_FOUND") {
+      loggingUtils.showLogging("ERROR", error.message);
+      return [];
+
+      // Error Unauthorize
+    } else if (error.response && error.response.status === 401) {
       try {
         const list = await dbService.readListByTitle("gamma");
         await dbService.updateListStatus(list.id, false);
@@ -29,6 +49,7 @@ const sortingPriceListByName = async (name) => {
         loggingUtils.showLogging("ERROR", dbError.stack);
       }
     }
+    loggingUtils.showLogging("ERROR", error.stack);
   }
 };
 

@@ -3,13 +3,16 @@ const tables = document.querySelectorAll(".table-price");
 const loading = document.getElementById("analytics-loading-data");
 const cancelLoading = document.getElementById("cancel-loading");
 
-cancelLoading.addEventListener("click", () =>{
+cancelLoading.addEventListener("click", () => {
   loading.setAttribute("class", "hidden");
 });
 
 sortings.forEach((sorting) => {
   sorting.addEventListener("click", (e) => {
-    loading.setAttribute("class", "container absolute top-0 bottom-0 right-0 left-0");
+    loading.setAttribute(
+      "class",
+      "container absolute top-0 bottom-0 right-0 left-0"
+    );
     const name = e.target.textContent;
     electronAPI.reqPriceLists(name);
   });
@@ -40,10 +43,10 @@ const createTableRow = (kodeProduk, namaProduk, harga) => {
   tr.appendChild(tdNamaProduk);
   tr.appendChild(tdHarga);
   return tr;
-}
+};
 
 electronAPI.resPriceLists((data) => {
-  // console.log(data);
+  console.log(data);
   let loopingIdx = 1;
   const tableLenght = tables.length;
   tables.forEach((table) => {
@@ -54,15 +57,15 @@ electronAPI.resPriceLists((data) => {
     if (!data[tableId]) {
       const tr = createTableRowNoContent("Mohon login ulang");
       tbody.appendChild(tr);
-      if (loopingIdx === (tableLenght - 1)) {
+      if (loopingIdx === tableLenght - 1) {
         loading.setAttribute("class", "hidden");
       }
       return;
-    };
+    }
     if (data[tableId].length < 1) {
       const tr = createTableRowNoContent("Data Tidak Ditemukan");
-      tbody.appendChild(tr);  
-      if (loopingIdx === (tableLenght - 1)) {
+      tbody.appendChild(tr);
+      if (loopingIdx === tableLenght - 1) {
         loading.setAttribute("class", "hidden");
       }
       return;
@@ -71,7 +74,7 @@ electronAPI.resPriceLists((data) => {
       const tr = createTableRow(data.kodeProduk, data.namaProduk, data.harga);
       tbody.appendChild(tr);
     });
-    if (loopingIdx === (tableLenght - 1)) {
+    if (loopingIdx === tableLenght - 1) {
       loading.setAttribute("class", "hidden");
     }
   });
