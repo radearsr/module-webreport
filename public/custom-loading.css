@@ -3,13 +3,15 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .loader-1 {
   height: 100px;
   width: 100px;
-  border: 10px solid #ccc;
+  border: 10px solid #939393;
   border-right-color: rgb(163 230 53);
   border-radius: 50%;
   animation: rotate 1.5s linear infinite;

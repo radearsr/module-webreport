@@ -1,6 +1,11 @@
 const sortings = document.querySelectorAll(".sorting");
 const tables = document.querySelectorAll(".table-price");
 const loading = document.getElementById("analytics-loading-data");
+const cancelLoading = document.getElementById("cancel-loading");
+
+cancelLoading.addEventListener("click", () =>{
+  loading.setAttribute("class", "hidden");
+});
 
 sortings.forEach((sorting) => {
   sorting.addEventListener("click", (e) => {
