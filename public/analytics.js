@@ -35,7 +35,7 @@ const createTableRow = (kodeProduk, namaProduk, harga) => {
   tdHarga.setAttribute("class", "px-4 py-2");
   tdKodeProduk.textContent = kodeProduk;
   tdNamaProduk.textContent = namaProduk;
-  tdHarga.textContent = harga;
+  tdHarga.textContent = `Rp${parseInt(harga).toLocaleString("id-ID")}`;
   tr.appendChild(tdKodeProduk);
   tr.appendChild(tdNamaProduk);
   tr.appendChild(tdHarga);
@@ -43,12 +43,11 @@ const createTableRow = (kodeProduk, namaProduk, harga) => {
 }
 
 electronAPI.resPriceLists((data) => {
-  console.log(data);
+  // console.log(data);
   let loopingIdx = 1;
   const tableLenght = tables.length;
   tables.forEach((table) => {
     loopingIdx++;
-
     const tableId = table.getAttribute("id");
     const tbody = table.querySelector("tbody");
     tbody.innerHTML = "";
@@ -69,7 +68,6 @@ electronAPI.resPriceLists((data) => {
       return;
     }
     data[tableId].forEach((data) => {
-      console.log(data);
       const tr = createTableRow(data.kodeProduk, data.namaProduk, data.harga);
       tbody.appendChild(tr);
     });

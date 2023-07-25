@@ -60,15 +60,6 @@ const sortingPriceListByName = async (name) => {
           });
         });
       });
-      // const mergedObject = resultFiltered.reduce((result, item) => {
-      //   result[item.namaoperator] = item.data.map((data) => ({
-      //     kodeProduk: data.kodeproduk,
-      //     namaProduk: data.namaproduk,
-      //     harga: data.harga,
-      //   }));
-      //   return result;
-      // }, {});
-      // console.log({ allDatas });
       return allDatas;
     } else {
       // All Product

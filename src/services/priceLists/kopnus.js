@@ -50,16 +50,6 @@ const sortingPriceListByName = async (name) => {
           });
         });
       });
-
-      // const mergedObject = resultFiltered.reduce((result, item) => {
-      //   result[item.namaoperator] = item.data.map((data) => ({
-      //     kodeProduk: data.kodeproduk,
-      //     namaProduk: data.namaproduk,
-      //     harga: data.harga,
-      //   }));
-      //   return result;
-      // }, {});
-
       return allDatas;
     } else {
       // ALL product
@@ -67,7 +57,7 @@ const sortingPriceListByName = async (name) => {
         data.namaoperator.toLowerCase().includes(keyword)
       );
       const result = priceLists.pulsa[resultIndex]?.data;
-      if (!result) throw new Error("HOTSPOTRELOAD_DATA_NOT_FOUND");
+      if (!result) throw new Error("KOPNUS_DATA_NOT_FOUND");
       const resultMapped = result.map((data) => ({
         kodeProduk: data.kodeproduk,
         namaProduk: data.namaproduk,
@@ -76,7 +66,7 @@ const sortingPriceListByName = async (name) => {
       return resultMapped;
     }
   } catch (error) {
-    if (error.message === "HOTSPOTRELOAD_DATA_NOT_FOUND") {
+    if (error.message === "KOPNUS_DATA_NOT_FOUND") {
       loggingUtils.showLogging("ERROR", error.message);
       return [];
     }

@@ -36,7 +36,6 @@ const sortingPriceListByName = async (name) => {
           namaProduk: data.nama,
           harga: data.nominal,
         }));
-
         if (keyword === "gopay") {
           const produkSortedByKeyword = sortByKeyword("gojek", resultMapped);
           return produkSortedByKeyword;
