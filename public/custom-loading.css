@@ -1,0 +1,22 @@
+.container {
+  background-color: rgba(197, 197, 197, 0.633);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.loader-1 {
+  height: 100px;
+  width: 100px;
+  border: 10px solid #ccc;
+  border-right-color: rgb(163 230 53);
+  border-radius: 50%;
+  animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate{
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -10,6 +10,7 @@
     <title>Module Web Report</title>
     <link rel="stylesheet" href="custom-scrollbar.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="custom-loading.css" />
   </head>
   <body x-data="{ sidebarOpen: false }">
     <div class="flex h-screen w-screen">
@@ -123,17 +124,16 @@
 
       <!-- Awal Main Content -->
       <main
-        class="flex flex-col flex-grow h-screen overflow-y-auto overflow-x-hidden">
+        class="flex flex-col flex-grow h-screen overflow-y-auto overflow-x-hidden relative"
+        x-data="{selected:1}">
         <div class="p-4">
           <!-- Awal Section Analystics -->
-          <section id="analytics" class="">
+          <section id="analytics">
             <h1
               :class="sidebarOpen? 'text-3xl' : 'text-sm'"
               class="text-black font-bold py-5 px-2 transition-all duration-500">
               Analytics
             </h1>
-            <!-- <h1 class="text-2xl font-bold mb-5">Konten Utama</h1> -->
-            <!-- Input Search -->
             <div class="flex gap-x-4 rounded-md">
               <div
                 class="px-10 py-12 rounded-lg bg-lime-50 mb-6 flex flex-col text-center">
@@ -203,109 +203,276 @@
                 <span class="mt-1 font-light text-gray-500">Pascabayar</span>
               </div>
             </div>
-
-            <!-- Table 1 -->
-            <h2 class="uppercase mt-4 font-bold text-2xl p-2">hotspot</h2>
-            <table class="w-full table-auto table-price" id="hotspotPrice">
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 bg-gray-200 uppercase text-left">
-                    Kode Produk
-                  </th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase text-left">
-                    Nama Produk
-                  </th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase text-left">
-                    Harga
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="px-4 py-2 text-center" colspan="3">Data 1A</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Table 2 -->
-            <h2 class="uppercase mt-4 font-bold text-2xl p-2">
-              monitoring bsi
-            </h2>
-            <table
-              class="w-full table-auto table-price"
-              id="monitoringBsiPrice">
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Kode Produk</th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Nama Produk</th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Harga</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="px-4 py-2">Data 1A</td>
-                  <td class="px-4 py-2">Data 1B</td>
-                  <td class="px-4 py-2">Data 1C</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Table 3 -->
-            <h2 class="uppercase mt-4 font-bold text-2xl p-2">kopnus</h2>
-            <table class="w-full table-auto table-price" id="kopnusPrice">
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Kode Produk</th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Nama Produk</th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Harga</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="px-4 py-2">Data 1A</td>
-                  <td class="px-4 py-2">Data 1B</td>
-                  <td class="px-4 py-2">Data 1C</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Table 4 -->
-            <h2 class="uppercase mt-4 font-bold text-2xl p-2">pluslink</h2>
-            <table class="w-full table-auto table-price" id="pluslinkPrice">
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Kode Produk</th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Nama Produk</th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Harga</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="px-4 py-2">Data 1A</td>
-                  <td class="px-4 py-2">Data 1B</td>
-                  <td class="px-4 py-2">Data 1C</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- Table 5 -->
-            <h2 class="uppercase mt-4 font-bold text-2xl p-2">gamma</h2>
-            <table class="w-full table-auto table-price" id="gammaPrice">
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Kode Produk</th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Nama Produk</th>
-                  <th class="px-4 py-2 bg-gray-200 uppercase">Harga</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="px-4 py-2">Data 1A</td>
-                  <td class="px-4 py-2">Data 1B</td>
-                  <td class="px-4 py-2">Data 1C</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="w-full flex justify-center gap-2">
+              <div class="w-1/2">
+                <div class="bg-white">
+                  <ul class="shadow-box">
+                    <!-- Acordion 1 -->
+                    <li
+                      class="relative border-b border-gray-200 mb-2"
+                      x-data="{selected:null}">
+                      <button
+                        type="button"
+                        class="w-full px-2 py-3 text-left"
+                        @click="selected !== 1 ? selected = 1 : selected = null">
+                        <div class="flex items-center justify-between">
+                          <span class="uppercase text-lg font-bold"
+                            >hotspot</span
+                          >
+                          <span
+                            x-html="selected !== 1 ? '+' : '-'"
+                            class="font-bold text-lg"></span>
+                        </div>
+                      </button>
+                      <div
+                        class="relative overflow-hidden transition-all max-h-0 duration-700"
+                        style=""
+                        x-ref="table1"
+                        x-bind:style="selected == 1 ? 'max-height: ' + $refs.table1.scrollHeight + 'px' : ''">
+                        <table
+                          class="w-full table-auto table-price"
+                          id="hotspotPrice">
+                          <thead>
+                            <tr>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Kode Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Nama Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Harga
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="px-4 py-2 text-center" colspan="3">
+                                Cari data!!
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                    <!-- Acordion 2 -->
+                    <li
+                      class="relative border-b border-gray-200 mb-2"
+                      x-data="{selected:null}">
+                      <button
+                        type="button"
+                        class="w-full px-2 py-3 text-left"
+                        @click="selected !== 2 ? selected = 2 : selected = null">
+                        <div class="flex items-center justify-between">
+                          <span class="uppercase text-lg font-bold"
+                            >kopnus</span
+                          >
+                          <span
+                            x-html="selected !== 2 ? '+' : '-'"
+                            class="font-bold text-lg"></span>
+                        </div>
+                      </button>
+                      <div
+                        class="relative overflow-hidden transition-all max-h-0 duration-700"
+                        style=""
+                        x-ref="table2"
+                        x-bind:style="selected == 2 ? 'max-height: ' + $refs.table2.scrollHeight + 'px' : ''">
+                        <table
+                          class="w-full table-auto table-price"
+                          id="kopnusPrice">
+                          <thead>
+                            <tr>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Kode Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Nama Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Harga
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="px-4 py-2 text-center" colspan="3">
+                                Cari data!!
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                    <!-- Acordion 3 -->
+                    <li
+                      class="relative border-b border-gray-200 mb-2"
+                      x-data="{selected:null}">
+                      <button
+                        type="button"
+                        class="w-full px-2 py-3 text-left"
+                        @click="selected !== 3 ? selected = 3 : selected = null">
+                        <div class="flex items-center justify-between">
+                          <span class="uppercase text-lg font-bold">gamma</span>
+                          <span
+                            x-html="selected !== 3 ? '+' : '-'"
+                            class="font-bold text-lg"></span>
+                        </div>
+                      </button>
+                      <div
+                        class="relative overflow-hidden transition-all max-h-0 duration-700"
+                        style=""
+                        x-ref="table3"
+                        x-bind:style="selected == 3 ? 'max-height: ' + $refs.table3.scrollHeight + 'px' : ''">
+                        <table
+                          class="w-full table-auto table-price"
+                          id="gammaPrice">
+                          <thead>
+                            <tr>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Kode Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Nama Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Harga
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="px-4 py-2 text-center" colspan="3">
+                                Cari data!!
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="w-1/2">
+                <div class="bg-white mx-auto">
+                  <ul class="shadow-box">
+                    <!-- Acordion 4 -->
+                    <li
+                      class="relative border-b border-gray-200 mb-2"
+                      x-data="{selected:null}">
+                      <button
+                        type="button"
+                        class="w-full px-2 py-3 text-left"
+                        @click="selected !== 4 ? selected = 4 : selected = null">
+                        <div class="flex items-center justify-between">
+                          <span class="font-bold text-lg uppercase"
+                            >monitoring bsi</span
+                          >
+                          <span
+                            x-html="selected !== 4 ? '+' : '-'"
+                            class="font-bold text-lg"></span>
+                        </div>
+                      </button>
+                      <div
+                        class="relative overflow-hidden transition-all max-h-0 duration-700"
+                        style=""
+                        x-ref="table4"
+                        x-bind:style="selected == 4 ? 'max-height: ' + $refs.table4.scrollHeight + 'px' : ''">
+                        <table
+                          class="w-full table-auto table-price"
+                          id="monitoringBsiPrice">
+                          <thead>
+                            <tr>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Kode Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Nama Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Harga
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="px-4 py-2 text-center" colspan="3">
+                                Cari data!!
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                    <!-- Acording 5 -->
+                    <li
+                      class="relative border-b border-gray-200 mb-2"
+                      x-data="{selected:null}">
+                      <button
+                        type="button"
+                        class="w-full px-2 py-3 text-left"
+                        @click="selected !== 5 ? selected = 5 : selected = null">
+                        <div class="flex items-center justify-between">
+                          <span class="font-bold text-lg uppercase"
+                            >pluslink</span
+                          >
+                          <span
+                            x-html="selected !== 5 ? '+' : '-'"
+                            class="font-bold text-lg"></span>
+                        </div>
+                      </button>
+                      <div
+                        class="relative overflow-hidden transition-all max-h-0 duration-700"
+                        style=""
+                        x-ref="table5"
+                        x-bind:style="selected == 5 ? 'max-height: ' + $refs.table5.scrollHeight + 'px' : ''">
+                        <table
+                          class="w-full table-auto table-price"
+                          id="pluslinkPrice">
+                          <thead>
+                            <tr>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Kode Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Nama Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                Harga
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="px-4 py-2 text-center" colspan="3">
+                                Cari data!!
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="hidden" id="analytics-loading-data">
+              <div class="loader-1"></div>
+            </div>
           </section>
           <!-- Akhir Section Analystics -->
 
