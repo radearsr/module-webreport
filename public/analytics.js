@@ -43,6 +43,7 @@ const createTableRow = (kodeProduk, namaProduk, harga) => {
 }
 
 electronAPI.resPriceLists((data) => {
+  console.log(data);
   let loopingIdx = 1;
   const tableLenght = tables.length;
   tables.forEach((table) => {

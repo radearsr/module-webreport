@@ -50,17 +50,26 @@ const sortingPriceListByName = async (name) => {
       const resultFiltered = priceLists.pulsa.filter((data) =>
         data.namaoperator.toLowerCase().includes(keyword)
       );
-
-      const mergedObject = resultFiltered.reduce((result, item) => {
-        result[item.namaoperator] = item.data.map((data) => ({
-          kodeProduk: data.kodeproduk,
-          namaProduk: data.namaproduk,
-          harga: data.harga,
-        }));
-        return result;
-      }, {});
-
-      return mergedObject;
+      const allDatas = []
+      resultFiltered.forEach((result) => {
+        result.data.forEach((data) => {
+          allDatas.push({
+            kodeProduk: data.kodeproduk,
+            namaProduk: data.namaproduk,
+            harga: data.harga,
+          });
+        });
+      });
+      // const mergedObject = resultFiltered.reduce((result, item) => {
+      //   result[item.namaoperator] = item.data.map((data) => ({
+      //     kodeProduk: data.kodeproduk,
+      //     namaProduk: data.namaproduk,
+      //     harga: data.harga,
+      //   }));
+      //   return result;
+      // }, {});
+      // console.log({ allDatas });
+      return allDatas;
     } else {
       // All Product
       console.log("HOTSPOTRELOAD ELSE");
