@@ -25,7 +25,10 @@ const sortingPriceListByName = async (name) => {
       keyword === "shopee" ||
       keyword === "link" ||
       keyword === "ovo" ||
-      keyword === "gopay"
+      keyword === "gopay" ||
+      keyword === "brizzi" ||
+      keyword === "mandiri" ||
+      keyword === "maxim"
     ) {
       const financeObject = getDataPrice.find(
         (item) => item.nama_kategori === "E-MONEY"

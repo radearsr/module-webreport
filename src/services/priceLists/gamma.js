@@ -17,6 +17,9 @@ const sortingPriceListByName = async (name) => {
       // PPOB Product
     } else if (keyword === "ppob") {
       keyword = "pln";
+      // Brizi Product
+    } else if (keyword === "brizzi") {
+      keyword = "brizii";
     }
 
     // All Product
