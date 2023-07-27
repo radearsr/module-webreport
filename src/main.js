@@ -49,7 +49,7 @@ const createWindow = () => {
 
   mainWindow.webContents.openDevTools();
 
-  ipcMain.on("form-data", async (event, data) => {
+  ipcMain.on("req-login-auth", async (event, data) => {
     const { formId } = data;
     if (formId === "gamma") {
       await handleGamaForm(formId, data, mainWindow);

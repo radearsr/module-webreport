@@ -13,7 +13,7 @@ const handleCyrus = async (title, data, electronMainProccess) => {
     const list = await dbService.readListByTitle(title);
     loggingUtils.showLogging("WARN", JSON.stringify(list));
     if (list.status) {
-      return electronMainProccess.send("login-success", {
+      return electronMainProccess.send("res-login-auth", {
         formId: title,
       });
     }
@@ -23,8 +23,6 @@ const handleCyrus = async (title, data, electronMainProccess) => {
       username,
       password
     );
-    // const token = loginResponse;
-    // const priceListsResponse = await getPriceLists(token);
     loggingUtils.showLogging("INFO", JSON.stringify(loginResponse));
     const token = loginResponse;
     if (!token) throw new Error("INVALID_TOKEN");
@@ -34,7 +32,7 @@ const handleCyrus = async (title, data, electronMainProccess) => {
     }
     await dbService.updateAuthByListId(list.id, token);
     await dbService.updateListStatus(list.id, true);
-    electronMainProccess.send("login-success", {
+    electronMainProccess.send("res-login-auth", {
       formId: title,
     });
   } catch (error) {

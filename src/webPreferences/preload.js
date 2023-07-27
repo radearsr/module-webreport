@@ -1,8 +1,13 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("electronAPI", {
-  sendFormData: (data) => {
-    ipcRenderer.send("form-data", data);
+  reqLoginAuth: (data) => {
+    ipcRenderer.send("req-login-auth", data);
+  },
+  resLoginAuth: (callback) => {
+    ipcRenderer.on("res-login-auth", (_, loginIdentity) => {
+      callback(loginIdentity);
+    });
   },
   reqLogoutAuth: (data) => {
     ipcRenderer.send("req-logout-auth", data);
@@ -26,11 +31,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
   resPriceLists: (callback) => {
     ipcRenderer.on("res-price-lists", (_, priceLists) => {
       callback(priceLists);
-    });
-  },
-  onLoginSuccess: (callback) => {
-    ipcRenderer.on("login-success", (_, loginIdentity) => {
-      callback(loginIdentity);
     });
   },
   onSystemLogging: (callback) => {

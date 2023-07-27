@@ -13,7 +13,7 @@ const handleMonitoringBsi = async (title, data, electronMainProccess) => {
     const list = await dbService.readListByTitle(title);
     loggingService.showLogging("WARN", JSON.stringify(list));
     if (list.status) {
-      return electronMainProccess.send("login-success", {
+      return electronMainProccess.send("res-login-auth", {
         formId: title,
       });
     }
@@ -29,15 +29,11 @@ const handleMonitoringBsi = async (title, data, electronMainProccess) => {
     }
     await dbService.updateAuthByListId(list.id, newTokenFormat);
     await dbService.updateListStatus(list.id, true);
-    electronMainProccess.send("login-success", {
+    electronMainProccess.send("res-login-auth", {
       formId: title,
     });
   } catch (error) {
-    console.error("Login atau pengambilan data daftar harga gagal:", error);
-    event.sender.send(
-      "error",
-      "Login atau pengambilan data daftar harga gagal"
-    );
+    loggingUtils.showLogging("ERROR", error.stack);
   }
 };
 

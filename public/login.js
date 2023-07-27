@@ -9,14 +9,14 @@ forms.forEach((form) => {
     const username = formData.get("username");
     const password = formData.get("password");
     if (formAction === "login") {
-      electronAPI.sendFormData({ formId, username, password });
+      electronAPI.reqLoginAuth({ formId, username, password });
     } else {
       electronAPI.reqLogoutAuth({ formId });
     }
   });
 });
 
-electronAPI.onLoginSuccess((data) => {
+electronAPI.resLoginAuth((data) => {
   const form = document.getElementById(data.formId);
   const statusBullet = form.parentElement.querySelector("span:first-child");
   let username = form.querySelector("input[name='username']");
