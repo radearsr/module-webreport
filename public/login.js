@@ -3,18 +3,15 @@ const forms = document.querySelectorAll("form");
 forms.forEach((form) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-
-    const buttonSubmit = form.parentElement.querySelector(
-      "button[type='submit']"
-    );
     const formData = new FormData(form);
     const formId = form.getAttribute("id");
+    const formAction = form.dataset.formAction;
     const username = formData.get("username");
     const password = formData.get("password");
-    try {
+    if (formAction === "login") {
       electronAPI.sendFormData({ formId, username, password });
-    } catch (error) {
-      console.error("Gagal mengirim data form melalui IPC:", error);
+    } else {
+      electronAPI.reqLogoutAuth({ formId });
     }
   });
 });
@@ -22,13 +19,50 @@ forms.forEach((form) => {
 electronAPI.onLoginSuccess((data) => {
   const form = document.getElementById(data.formId);
   const statusBullet = form.parentElement.querySelector("span:first-child");
-  const buttonElement = form.querySelector("#loginButton");
+  let username = form.querySelector("input[name='username']");
+  let password = form.querySelector("input[name='password']");
+  let buttonLogin = form.querySelector('button[data-status="login"');
+  let buttonLogout = form.querySelector('button[data-status="logout"');
+
+  form.dataset.formAction = "logout";
+
+  buttonLogin.classList.remove("block");
+  buttonLogin.classList.add("hidden");
+  buttonLogout.classList.remove("hidden");
+  buttonLogout.classList.add("block");
+
   statusBullet.classList.remove("bg-slate-300");
   statusBullet.classList.add("bg-lime-500");
-  buttonElement.classList.remove("bg-slate-300");
-  buttonElement.classList.add("bg-lime-500");
-  buttonElement.classList.add("disabled");
-  buttonElement.disabled = true;
+
+  username.disabled = true;
+  username.classList.add("bg-gray-200");
+  password.disabled = true;
+  password.classList.add("bg-gray-200");
+});
+
+
+electronAPI.resLogoutAuth((data) => {
+  const form = document.getElementById(data.formId);
+  const statusBullet = form.parentElement.querySelector("span:first-child");
+  let username = form.querySelector("input[name='username']");
+  let password = form.querySelector("input[name='password']");
+  let buttonLogin = form.querySelector('button[data-status="login"');
+  let buttonLogout = form.querySelector('button[data-status="logout"');
+
+  form.dataset.formAction = "login";
+
+  buttonLogin.classList.remove("hidden");
+  buttonLogin.classList.add("block");
+  buttonLogout.classList.add("hidden");
+  buttonLogout.classList.remove("block");
+
+  statusBullet.classList.remove("bg-lime-500");
+  statusBullet.classList.add("bg-slate-300");
+
+  username.disabled = false;
+  username.classList.remove("bg-gray-200");
+  password.disabled = false;
+  password.classList.remove("bg-gray-200");
 });
 
 electronAPI.resLoginStatus((lists) => {
@@ -38,25 +72,42 @@ electronAPI.resLoginStatus((lists) => {
     let username = form.querySelector("input[name='username']");
     let password = form.querySelector("input[name='password']");
     let statusBullet = form.parentElement.querySelector("span:first-child");
-    let buttonElement = form.querySelector("#loginButton");
+    let buttonLogin = form.querySelector('button[data-status="login"');
+    let buttonLogout = form.querySelector('button[data-status="logout"');
 
     username.value = list.username;
     password.value = list.password;
 
     if (list.status === 0) {
+      form.dataset.formAction = "login";
+
+      buttonLogin.classList.remove("hidden");
+      buttonLogin.classList.add("block");
+      buttonLogout.classList.add("hidden");
+      buttonLogout.classList.remove("block");
+
       statusBullet.classList.remove("bg-lime-500");
       statusBullet.classList.add("bg-slate-300");
-      buttonElement.classList.remove("bg-lime-500");
-      buttonElement.classList.add("bg-slate-300");
-      buttonElement.classList.remove("disabled");
-      buttonElement.disabled = false;
+
+      username.disabled = false;
+      username.classList.remove("bg-gray-200");
+      password.disabled = false;
+      username.classList.remove("bg-gray-200");
     } else {
+      form.dataset.formAction = "logout";
+
+      buttonLogin.classList.remove("block");
+      buttonLogin.classList.add("hidden");
+      buttonLogout.classList.remove("hidden");
+      buttonLogout.classList.add("block");
+
       statusBullet.classList.remove("bg-slate-300");
       statusBullet.classList.add("bg-lime-500");
-      buttonElement.classList.remove("bg-slate-300");
-      buttonElement.classList.add("bg-lime-500");
-      buttonElement.classList.add("disabled");
-      buttonElement.disabled = true;
+
+      username.disabled = true;
+      username.classList.add("bg-gray-200");
+      password.disabled = true;
+      password.classList.add("bg-gray-200");
     }
   });
 });

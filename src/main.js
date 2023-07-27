@@ -89,6 +89,12 @@ const createWindow = () => {
     mainWindow.send("res-price-lists", resultPriceLists);
   });
 
+  ipcMain.on("req-logout-auth", async (event, data) => {
+    const { formId } = data;
+    await dbServices.updateListStatusByTitle(formId, false);
+    mainWindow.send("res-logout-auth", { formId });
+  });
+
   mainWindow.loadFile(path.join(__dirname, "../public/index.html"));
 };
 

@@ -50,6 +50,15 @@ const updateListStatus = async (listId, status) => {
   return updatedList;
 };
 
+const updateListStatusByTitle = async(title, status) => {
+  await checkAndCreateAllTable();
+  const db = await AsyncDatabase.open(databasePath);
+  const queryUpdate = `UPDATE lists SET status = ${status} WHERE title = '${title}'`;
+  const updatedList = await db.run(queryUpdate);
+  db.close();
+  return updatedList;
+};
+
 const readAllLists = async () => {
   await checkAndCreateAllTable();
   const db = await AsyncDatabase.open(databasePath);
@@ -85,4 +94,5 @@ module.exports = {
   readAllLists,
   readAuthByListId,
   updateAuthByListId,
+  updateListStatusByTitle,
 };

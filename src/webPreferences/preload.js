@@ -4,6 +4,14 @@ contextBridge.exposeInMainWorld("electronAPI", {
   sendFormData: (data) => {
     ipcRenderer.send("form-data", data);
   },
+  reqLogoutAuth: (data) => {
+    ipcRenderer.send("req-logout-auth", data);
+  },
+  resLogoutAuth: (callback) => {
+    ipcRenderer.on("res-logout-auth", (_, logoutAuth) => {
+      callback(logoutAuth);
+    });
+  },
   reqLoginStatus: () => {
     ipcRenderer.send("req-login-status");
   },
