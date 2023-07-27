@@ -15,6 +15,7 @@ const handleKopnusGetPriceLists = require("./services/priceLists/kopnus");
 const handleGammaGetPriceLists = require("./services/priceLists/gamma");
 const handlePluslinkGetPriceLists = require("./services/priceLists/pluslink");
 const handleMonitoringBsiGetPriceLists = require("./services/priceLists/monitoringBsi");
+const handleCyrusPriceLists = require("./services/priceLists/cyrus");
 
 const logConsoleOutput = (electronMainProc) => {
   const { stdout, stderr } = process;
@@ -76,12 +77,14 @@ const createWindow = () => {
     const kopnusPrice = await handleKopnusGetPriceLists(data);
     const pluslinkPrice = await handlePluslinkGetPriceLists(data);
     const monitoringBsiPrice = await handleMonitoringBsiGetPriceLists(data);
+    const cyrusPrice = await handleCyrusPriceLists(data);
     const resultPriceLists = {
       hotspotPrice,
       kopnusPrice,
       gammaPrice,
       pluslinkPrice,
       monitoringBsiPrice,
+      cyrusPrice,
     };
     mainWindow.send("res-price-lists", resultPriceLists);
   });

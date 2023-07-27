@@ -1,5 +1,6 @@
 const axios = require("axios");
 const qs = require("querystring");
+const cheerio = require("cheerio");
 
 const getCookieWeb = async () => {
   const response = await axios.get(
@@ -7,16 +8,19 @@ const getCookieWeb = async () => {
   );
   const setCookieHeader = response.headers["set-cookie"];
 
-  if (!setCookieHeader) throw new Error("CYRUS_GET_COOKIE_FAILED");
+  const parseCookies = (cookieHeader) => {
+    return cookieHeader.reduce((cookies, cookie) => {
+      const [name, value] = cookie.split(";")[0].split("=");
+      cookies[name.trim()] = value.trim();
+      return cookies;
+    }, {});
+  };
 
-  const matchesCookie = setCookieHeader[0].match(
-    /ASPSESSIONIDCQETQBRQ=([^;]+)/
-  );
+  const cookies = parseCookies(setCookieHeader);
+  const tokenCookie = cookies["ASPSESSIONIDCQESSARR"];
+  console.log(tokenCookie);
 
-  if (!matchesCookie) throw new Error("CYRUS_MATCHING_COOKIE_FAILED");
-
-  const sessionId = matches[1];
-  return sessionId;
+  return tokenCookie;
 };
 
 const postLoginWeb = async (cookie, username, password) => {
@@ -28,14 +32,14 @@ const postLoginWeb = async (cookie, username, password) => {
     url: "https://cyrusku.cyruspad.com/customerh2h/login.asp",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      Cookie: `CSYSBLAZTCUSTOMER=autologin=; ASPSESSIONIDCQETQBRQ=${cookie}`,
+      Cookie: `CSYSBLAZTCUSTOMER=autologin=; ASPSESSIONIDCQESSARR=${cookie}`,
     },
     data,
   };
 
   const response = await axios(config);
-  const setCookieHeader = response.headers["set-cookie"];
-  return setCookieHeader;
+
+  return cookie;
 };
 
 const getPriceLists = async (cookie) => {
@@ -45,7 +49,7 @@ const getPriceLists = async (cookie) => {
     url: `https://cyrusku.cyruspad.com/customerh2h/customer_agen_pricelist.asp?t=customer_agen_price&recperpage=500
     `,
     headers: {
-      Cookie: `CSYSBLAZTCUSTOMER=autologin=; ASPSESSIONIDCQETQBRQ=${cookie}`,
+      Cookie: `CSYSBLAZTCUSTOMER=autologin=; ASPSESSIONIDCQESSARR=${cookie}`,
     },
   };
 
@@ -53,6 +57,13 @@ const getPriceLists = async (cookie) => {
   const html = response.data;
 
   const $ = cheerio.load(html);
+
+  const floginForm = $("#flogin");
+  if (floginForm.length > 0) {
+    const statusLogin = 0;
+    return statusLogin;
+  }
+
   const table = $("#tbl_customer_agen_pricelist.ewTable.ewTableSeparate");
   const tbody = table.find("tbody");
 
