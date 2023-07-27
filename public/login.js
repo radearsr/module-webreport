@@ -8,6 +8,7 @@ forms.forEach((form) => {
     const formAction = form.dataset.formAction;
     const username = formData.get("username");
     const password = formData.get("password");
+    console.log(formId, username, password);
     if (formAction === "login") {
       electronAPI.reqLoginAuth({ formId, username, password });
     } else {

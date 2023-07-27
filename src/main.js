@@ -9,6 +9,7 @@ const handleHotspotReload = require("./services/login/hotspotReload");
 const handleMonitoringBsi = require("./services/login/monitoringBsi");
 const handleKopnus = require("./services/login/kopnus");
 const handleCyrus = require("./services/login/cyrus");
+const handleLoginKepooH2h = require("./services/login/kepooH2h");
 
 const handleHotspotGetPriceLists = require("./services/priceLists/hotspotReload");
 const handleKopnusGetPriceLists = require("./services/priceLists/kopnus");
@@ -16,6 +17,7 @@ const handleGammaGetPriceLists = require("./services/priceLists/gamma");
 const handlePluslinkGetPriceLists = require("./services/priceLists/pluslink");
 const handleMonitoringBsiGetPriceLists = require("./services/priceLists/monitoringBsi");
 const handleCyrusPriceLists = require("./services/priceLists/cyrus");
+const handleKepooH2hPriceLists = require("./services/priceLists/kepooH2h");
 
 const logConsoleOutput = (electronMainProc) => {
   const { stdout, stderr } = process;
@@ -63,6 +65,9 @@ const createWindow = () => {
       await handleKopnus(formId, data, mainWindow);
     } else if (formId === "cyrus") {
       await handleCyrus(formId, data, mainWindow);
+    } else if (formId === "kepooH2h") {
+      console.log(formId, data);
+      await handleLoginKepooH2h(formId, data, mainWindow);
     }
   });
 
@@ -78,6 +83,8 @@ const createWindow = () => {
     const pluslinkPrice = await handlePluslinkGetPriceLists(data);
     const monitoringBsiPrice = await handleMonitoringBsiGetPriceLists(data);
     const cyrusPrice = await handleCyrusPriceLists(data);
+    const kepoH2hPrice = await handleKepooH2hPriceLists(data);
+    console.log(kepoH2hPrice);
     const resultPriceLists = {
       hotspotPrice,
       kopnusPrice,
