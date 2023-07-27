@@ -8,10 +8,6 @@ const sortingPriceListByName = async (name) => {
     if (!list) throw new Error("CYRUS_LIST_NOT_FOUND");
     const auth = await dbService.readAuthByListId(list.id);
     const priceLists = await getPriceLists(auth.token);
-    console.log(priceLists);
-    if (priceLists === 0) {
-      throw new Error("CYRUS_NOT_UNAUTHORIZE");
-    }
     let keyword = name.toLowerCase();
     const getDataPrice = JSON.parse(priceLists);
 
@@ -35,7 +31,6 @@ const sortingPriceListByName = async (name) => {
       loggingUtils.showLogging("ERROR", error.message);
       return [];
 
-      // Error Unauthorize
     } else if (error.message === "CYRUS_NOT_UNAUTHORIZE") {
       try {
         const list = await dbService.readListByTitle("cyrus");

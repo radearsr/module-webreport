@@ -55,6 +55,11 @@ const getPriceLists = async (cookie) => {
 
   const response = await axios(config);
   const html = response.data;
+  console.log(html);
+  
+  if (html.includes("flogin")) {
+    throw new Error("CYRUS_NOT_UNAUTHORIZE");
+  }
 
   const $ = cheerio.load(html);
 
