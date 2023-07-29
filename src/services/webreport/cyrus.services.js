@@ -6,23 +6,13 @@ const getCookieWeb = async () => {
   const response = await axios.get(
     "https://cyrusku.cyruspad.com/customerh2h/login.asp"
   );
-  const setCookieHeader = response.headers["set-cookie"];
-
-  const parseCookies = (cookieHeader) => {
-    return cookieHeader.reduce((cookies, cookie) => {
-      const [name, value] = cookie.split(";")[0].split("=");
-      cookies[name.trim()] = value.trim();
-      return cookies;
-    }, {});
-  };
-
-  const cookies = parseCookies(setCookieHeader);
-  const tokenCookie = cookies["ASPSESSIONIDCQESSARR"];
-
-  return tokenCookie;
+  const [setCookieHeader] = response.headers["set-cookie"];
+  const [actualCookie] = setCookieHeader.split(";")
+  const [cookieKey, cookieValue] = actualCookie.split("=");
+  return { cookieKey, cookieValue };
 };
 
-const postLoginWeb = async (cookie, username, password) => {
+const postLoginWeb = async (cookieKey, cookieValue, username, password) => {
   const data = qs.stringify({ username, password });
 
   const config = {
@@ -31,24 +21,25 @@ const postLoginWeb = async (cookie, username, password) => {
     url: "https://cyrusku.cyruspad.com/customerh2h/login.asp",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      Cookie: `CSYSBLAZTCUSTOMER=autologin=; ASPSESSIONIDCQESSARR=${cookie}`,
+      Cookie: `CSYSBLAZTCUSTOMER=autologin=; ${cookieKey}=${cookieValue}`,
     },
     data,
   };
 
-  const response = await axios(config);
-
-  return cookie;
+  const { data: responseLogin} = await axios(config);
+  if (responseLogin !== "") {
+    return { cookieKey, cookieValue }
+  }
 };
 
-const getPriceLists = async (cookie) => {
+const getPriceLists = async (cookieKey, cookieValue) => {
   const config = {
     method: "get",
     maxBodyLength: Infinity,
     url: `https://cyrusku.cyruspad.com/customerh2h/customer_agen_pricelist.asp?t=customer_agen_price&recperpage=500
     `,
     headers: {
-      Cookie: `CSYSBLAZTCUSTOMER=autologin=; ASPSESSIONIDCQESSARR=${cookie}`,
+      Cookie: `CSYSBLAZTCUSTOMER=autologin=; ${cookieKey}=${cookieValue}`,
     },
   };
 

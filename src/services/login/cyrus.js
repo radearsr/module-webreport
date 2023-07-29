@@ -17,20 +17,21 @@ const handleCyrus = async (title, data, electronMainProccess) => {
         formId: title,
       });
     }
-    const responseCookie = await getCookieWeb();
+    const responseGetWeb = await getCookieWeb();
     const loginResponse = await postLoginWeb(
-      responseCookie,
+      responseGetWeb.cookieKey,
+      responseGetWeb.cookieValue,
       username,
       password
     );
     loggingUtils.showLogging("INFO", JSON.stringify(loginResponse));
-    const token = loginResponse;
-    if (!token) throw new Error("INVALID_TOKEN");
+    const newFormatToken = `${loginResponse?.cookieKey}&-&${loginResponse?.cookieValue}`;
+    if (!loginResponse?.cookieKey || !loginResponse?.cookieValue) throw new Error("INVALID_TOKEN");
     const availableToken = await dbService.readAuthByListId(list.id);
     if (!availableToken) {
-      await dbService.createAuth(list.id, token);
+      await dbService.createAuth(list.id, newFormatToken);
     }
-    await dbService.updateAuthByListId(list.id, token);
+    await dbService.updateAuthByListId(list.id, newFormatToken);
     await dbService.updateListStatus(list.id, true);
     electronMainProccess.send("res-login-auth", {
       formId: title,
