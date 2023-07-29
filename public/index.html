@@ -18,7 +18,8 @@
       <div class="flex h-full">
         <nav
           :class="sidebarOpen ? 'w-60' : 'w-20'"
-          class="w-1/4 transition-all duration-500 bg-lime-50">
+          class="w-1/4 transition-all duration-500 bg-lime-50"
+        >
           <div class="p-4">
             <!-- Button Toggle -->
             <button @click="sidebarOpen = !sidebarOpen" class="text-black">
@@ -26,24 +27,28 @@
                 class="h-6 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor">
+                stroke="currentColor"
+              >
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M4 6h16M4 12h16m-7 6h7"></path>
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
               </svg>
             </button>
             <h1
               :class="sidebarOpen ? 'text-2xl' : 'text-sm'"
-              class="text-black font-bold py-5 px-2 transition-all duration-500">
+              class="text-black font-bold py-5 px-2 transition-all duration-500"
+            >
               MOWER
             </h1>
             <ul>
               <li class="nav-item">
                 <a
                   class="uppercase flex items-center text-center py-2 px-2 bg-lime-500"
-                  href="#analytics">
+                  href="#analytics"
+                >
                   <span>
                     <svg
                       fill="rgb(255 255 255)"
@@ -53,16 +58,19 @@
                       version="1.1"
                       preserveAspectRatio="xMidYMid meet"
                       xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink">
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
                       <path
                         class="clr-i-solid clr-i-solid-path-1"
-                        d="M 32 5 L 4 5 C 2.896 5 2 5.896 2 7 L 2 29 C 2 30.105 2.896 31 4 31 L 32 31 C 33.105 31 34 30.105 34 29 L 34 7 C 34 5.896 33.105 5 32 5 Z M 22.56 25.94 L 15.46 15.36 L 9.12 24.64 L 4.62 20.64 L 6 19.05 L 8.7 21.44 L 15.46 11.56 L 22.65 22.27 L 29.65 13 L 31.35 14.28 Z"></path>
+                        d="M 32 5 L 4 5 C 2.896 5 2 5.896 2 7 L 2 29 C 2 30.105 2.896 31 4 31 L 32 31 C 33.105 31 34 30.105 34 29 L 34 7 C 34 5.896 33.105 5 32 5 Z M 22.56 25.94 L 15.46 15.36 L 9.12 24.64 L 4.62 20.64 L 6 19.05 L 8.7 21.44 L 15.46 11.56 L 22.65 22.27 L 29.65 13 L 31.35 14.28 Z"
+                      ></path>
                       <rect
                         x="0"
                         y="0"
                         width="36"
                         height="36"
-                        fill-opacity="0" />
+                        fill-opacity="0"
+                      />
                     </svg>
                   </span>
                   <span
@@ -75,16 +83,19 @@
               <li class="nav-item">
                 <a
                   class="uppercase flex items-center text-center py-2 px-2"
-                  href="#login">
+                  href="#login"
+                >
                   <span>
                     <svg
                       width="32px"
                       height="32px"
                       viewBox="0 0 1024 1024"
                       fill="rgb(163 230 53)"
-                      xmlns="http://www.w3.org/2000/svg">
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <path
-                        d="M628.736 528.896A416 416 0 0 1 928 928H96a415.872 415.872 0 0 1 299.264-399.104L512 704l116.736-175.104zM720 304a208 208 0 1 1-416 0 208 208 0 0 1 416 0z" />
+                        d="M628.736 528.896A416 416 0 0 1 928 928H96a415.872 415.872 0 0 1 299.264-399.104L512 704l116.736-175.104zM720 304a208 208 0 1 1-416 0 208 208 0 0 1 416 0z"
+                      />
                     </svg>
                   </span>
                   <span
@@ -97,16 +108,19 @@
               <li class="nav-item">
                 <a
                   class="uppercase flex items-center text-center py-2 px-2"
-                  href="#logs">
+                  href="#logs"
+                >
                   <span>
                     <svg
                       width="32px"
                       height="32px"
                       viewBox="0 0 1024 1024"
                       fill="rgb(163 230 53)"
-                      xmlns="http://www.w3.org/2000/svg">
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <path
-                        d="M704 192h160v736H160V192h160v64h384v-64zM288 512h448v-64H288v64zm0 256h448v-64H288v64zm96-576V96h256v96H384z" />
+                        d="M704 192h160v736H160V192h160v64h384v-64zM288 512h448v-64H288v64zm0 256h448v-64H288v64zm96-576V96h256v96H384z"
+                      />
                     </svg>
                   </span>
                   <span
@@ -125,22 +139,26 @@
       <!-- Awal Main Content -->
       <main
         class="flex flex-col flex-grow h-screen overflow-y-auto overflow-x-hidden relative"
-        x-data="{selected:1}">
+        x-data="{selected:1}"
+      >
         <div class="p-4">
           <!-- Awal Section Analystics -->
           <section id="analytics">
             <h1
               :class="sidebarOpen? 'text-3xl' : 'text-sm'"
-              class="text-black font-bold py-5 px-2 transition-all duration-500">
+              class="text-black font-bold py-5 px-2 transition-all duration-500"
+            >
               Analytics
             </h1>
             <div class="flex gap-x-3 rounded-md">
               <!-- E-Money -->
               <div
-                class="flex-1 px-5 py-12 rounded-lg bg-lime-50 mb-6 flex flex-col text-center">
+                class="flex-1 px-5 py-12 rounded-lg bg-lime-50 mb-6 flex flex-col text-center"
+              >
                 <span class="text-2xl font-bold">Emoney</span>
                 <div
-                  class="flex flex-col justify-between mt-7 sm:gap-9 md:gap-3 sm:flex-row">
+                  class="flex flex-col justify-between mt-7 sm:gap-9 md:gap-3 sm:flex-row"
+                >
                   <!-- Bagian Kiri -->
                   <div class="w-full sm:w-1/2 flex flex-col">
                     <span
@@ -184,10 +202,12 @@
               </div>
               <!-- Opeartor -->
               <div
-                class="flex-1 px-5 py-12 rounded-lg bg-lime-50 mb-6 flex flex-col text-center">
+                class="flex-1 px-5 py-12 rounded-lg bg-lime-50 mb-6 flex flex-col text-center"
+              >
                 <span class="text-2xl font-bold">Operator</span>
                 <div
-                  class="flex flex-col justify-between mt-7 sm:gap-9 md:gap-3 sm:flex-row">
+                  class="flex flex-col justify-between mt-7 sm:gap-9 md:gap-3 sm:flex-row"
+                >
                   <!-- Bagian Kiri -->
                   <div class="w-full sm:w-1/2 flex flex-col">
                     <span
@@ -223,10 +243,12 @@
               </div>
               <!-- Lain lain -->
               <div
-                class="flex-1 px-5 py-12 rounded-lg bg-lime-50 mb-6 flex flex-col text-center">
+                class="flex-1 px-5 py-12 rounded-lg bg-lime-50 mb-6 flex flex-col text-center"
+              >
                 <span class="text-2xl font-bold">Lain Lain</span>
                 <div
-                  class="flex flex-col justify-between mt-7 sm:gap-9 md:gap-3 sm:flex-row">
+                  class="flex flex-col justify-between mt-7 sm:gap-9 md:gap-3 sm:flex-row"
+                >
                   <!-- Bagian Kiri -->
                   <div class="w-full sm:w-1/2 flex flex-col">
                     <span
@@ -252,40 +274,48 @@
                     <!-- Acordion 1 -->
                     <li
                       class="relative border-b border-gray-200 mb-2"
-                      x-data="{selected:null}">
+                      x-data="{selected:null}"
+                    >
                       <button
                         type="button"
                         class="w-full px-2 py-3 text-left"
-                        @click="selected !== 1 ? selected = 1 : selected = null">
+                        @click="selected !== 1 ? selected = 1 : selected = null"
+                      >
                         <div class="flex items-center justify-between">
                           <span class="uppercase text-lg font-bold"
                             >hotspot</span
                           >
                           <span
                             x-html="selected !== 1 ? '+' : '-'"
-                            class="font-bold text-lg"></span>
+                            class="font-bold text-lg"
+                          ></span>
                         </div>
                       </button>
                       <div
                         class="relative overflow-hidden transition-all max-h-0 duration-700"
                         style=""
                         x-ref="table1"
-                        x-bind:style="selected == 1 ? 'max-height: ' + $refs.table1.scrollHeight + 'px' : ''">
+                        x-bind:style="selected == 1 ? 'max-height: ' + $refs.table1.scrollHeight + 'px' : ''"
+                      >
                         <table
                           class="w-full table-auto table-price"
-                          id="hotspotPrice">
+                          id="hotspotPrice"
+                        >
                           <thead>
                             <tr>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Kode Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Nama Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Harga
                               </th>
                             </tr>
@@ -303,40 +333,48 @@
                     <!-- Acordion 2 -->
                     <li
                       class="relative border-b border-gray-200 mb-2"
-                      x-data="{selected:null}">
+                      x-data="{selected:null}"
+                    >
                       <button
                         type="button"
                         class="w-full px-2 py-3 text-left"
-                        @click="selected !== 2 ? selected = 2 : selected = null">
+                        @click="selected !== 2 ? selected = 2 : selected = null"
+                      >
                         <div class="flex items-center justify-between">
                           <span class="uppercase text-lg font-bold"
                             >kopnus</span
                           >
                           <span
                             x-html="selected !== 2 ? '+' : '-'"
-                            class="font-bold text-lg"></span>
+                            class="font-bold text-lg"
+                          ></span>
                         </div>
                       </button>
                       <div
                         class="relative overflow-hidden transition-all max-h-0 duration-700"
                         style=""
                         x-ref="table2"
-                        x-bind:style="selected == 2 ? 'max-height: ' + $refs.table2.scrollHeight + 'px' : ''">
+                        x-bind:style="selected == 2 ? 'max-height: ' + $refs.table2.scrollHeight + 'px' : ''"
+                      >
                         <table
                           class="w-full table-auto table-price"
-                          id="kopnusPrice">
+                          id="kopnusPrice"
+                        >
                           <thead>
                             <tr>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Kode Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Nama Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Harga
                               </th>
                             </tr>
@@ -354,38 +392,103 @@
                     <!-- Acordion 3 -->
                     <li
                       class="relative border-b border-gray-200 mb-2"
-                      x-data="{selected:null}">
+                      x-data="{selected:null}"
+                    >
                       <button
                         type="button"
                         class="w-full px-2 py-3 text-left"
-                        @click="selected !== 3 ? selected = 3 : selected = null">
+                        @click="selected !== 3 ? selected = 3 : selected = null"
+                      >
                         <div class="flex items-center justify-between">
                           <span class="uppercase text-lg font-bold">gamma</span>
                           <span
                             x-html="selected !== 3 ? '+' : '-'"
-                            class="font-bold text-lg"></span>
+                            class="font-bold text-lg"
+                          ></span>
                         </div>
                       </button>
                       <div
                         class="relative overflow-hidden transition-all max-h-0 duration-700"
                         style=""
                         x-ref="table3"
-                        x-bind:style="selected == 3 ? 'max-height: ' + $refs.table3.scrollHeight + 'px' : ''">
+                        x-bind:style="selected == 3 ? 'max-height: ' + $refs.table3.scrollHeight + 'px' : ''"
+                      >
                         <table
                           class="w-full table-auto table-price"
-                          id="gammaPrice">
+                          id="gammaPrice"
+                        >
                           <thead>
                             <tr>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Kode Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Nama Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
+                                Harga
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="px-4 py-2 text-center" colspan="3">
+                                Cari data!!
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                    <!-- Acordion 4 -->
+                    <li
+                      class="relative border-b border-gray-200 mb-2"
+                      x-data="{selected:null}"
+                    >
+                      <button
+                        type="button"
+                        class="w-full px-2 py-3 text-left"
+                        @click="selected !== 3 ? selected = 3 : selected = null"
+                      >
+                        <div class="flex items-center justify-between">
+                          <span class="uppercase text-lg font-bold">kepoo</span>
+                          <span
+                            x-html="selected !== 3 ? '+' : '-'"
+                            class="font-bold text-lg"
+                          ></span>
+                        </div>
+                      </button>
+                      <div
+                        class="relative overflow-hidden transition-all max-h-0 duration-700"
+                        style=""
+                        x-ref="table3"
+                        x-bind:style="selected == 3 ? 'max-height: ' + $refs.table3.scrollHeight + 'px' : ''"
+                      >
+                        <table
+                          class="w-full table-auto table-price"
+                          id="kepoH2hPrice"
+                        >
+                          <thead>
+                            <tr>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
+                                Kode Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
+                                Nama Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Harga
                               </th>
                             </tr>
@@ -406,94 +509,51 @@
               <div class="w-1/2">
                 <div class="bg-white mx-auto">
                   <ul class="shadow-box">
-                    <!-- Acordion 4 -->
+                    <!-- Acordion 5 -->
                     <li
                       class="relative border-b border-gray-200 mb-2"
-                      x-data="{selected:null}">
+                      x-data="{selected:null}"
+                    >
                       <button
                         type="button"
                         class="w-full px-2 py-3 text-left"
-                        @click="selected !== 4 ? selected = 4 : selected = null">
+                        @click="selected !== 4 ? selected = 4 : selected = null"
+                      >
                         <div class="flex items-center justify-between">
                           <span class="font-bold text-lg uppercase"
                             >monitoring bsi</span
                           >
                           <span
                             x-html="selected !== 4 ? '+' : '-'"
-                            class="font-bold text-lg"></span>
+                            class="font-bold text-lg"
+                          ></span>
                         </div>
                       </button>
                       <div
                         class="relative overflow-hidden transition-all max-h-0 duration-700"
                         style=""
                         x-ref="table4"
-                        x-bind:style="selected == 4 ? 'max-height: ' + $refs.table4.scrollHeight + 'px' : ''">
+                        x-bind:style="selected == 4 ? 'max-height: ' + $refs.table4.scrollHeight + 'px' : ''"
+                      >
                         <table
                           class="w-full table-auto table-price"
-                          id="monitoringBsiPrice">
+                          id="monitoringBsiPrice"
+                        >
                           <thead>
                             <tr>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Kode Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Nama Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
-                                Harga
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td class="px-4 py-2 text-center" colspan="3">
-                                Cari data!!
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </li>
-                    <!-- Acording 5 -->
-                    <li
-                      class="relative border-b border-gray-200 mb-2"
-                      x-data="{selected:null}">
-                      <button
-                        type="button"
-                        class="w-full px-2 py-3 text-left"
-                        @click="selected !== 5 ? selected = 5 : selected = null">
-                        <div class="flex items-center justify-between">
-                          <span class="font-bold text-lg uppercase"
-                            >pluslink</span
-                          >
-                          <span
-                            x-html="selected !== 5 ? '+' : '-'"
-                            class="font-bold text-lg"></span>
-                        </div>
-                      </button>
-                      <div
-                        class="relative overflow-hidden transition-all max-h-0 duration-700"
-                        style=""
-                        x-ref="table5"
-                        x-bind:style="selected == 5 ? 'max-height: ' + $refs.table5.scrollHeight + 'px' : ''">
-                        <table
-                          class="w-full table-auto table-price"
-                          id="pluslinkPrice">
-                          <thead>
-                            <tr>
-                              <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
-                                Kode Produk
-                              </th>
-                              <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
-                                Nama Produk
-                              </th>
-                              <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Harga
                               </th>
                             </tr>
@@ -511,38 +571,105 @@
                     <!-- Acording 6 -->
                     <li
                       class="relative border-b border-gray-200 mb-2"
-                      x-data="{selected:null}">
+                      x-data="{selected:null}"
+                    >
                       <button
                         type="button"
                         class="w-full px-2 py-3 text-left"
-                        @click="selected !== 5 ? selected = 5 : selected = null">
+                        @click="selected !== 5 ? selected = 5 : selected = null"
+                      >
                         <div class="flex items-center justify-between">
-                          <span class="font-bold text-lg uppercase">cyrus</span>
+                          <span class="font-bold text-lg uppercase"
+                            >pluslink</span
+                          >
                           <span
                             x-html="selected !== 5 ? '+' : '-'"
-                            class="font-bold text-lg"></span>
+                            class="font-bold text-lg"
+                          ></span>
                         </div>
                       </button>
                       <div
                         class="relative overflow-hidden transition-all max-h-0 duration-700"
                         style=""
                         x-ref="table5"
-                        x-bind:style="selected == 5 ? 'max-height: ' + $refs.table5.scrollHeight + 'px' : ''">
+                        x-bind:style="selected == 5 ? 'max-height: ' + $refs.table5.scrollHeight + 'px' : ''"
+                      >
                         <table
                           class="w-full table-auto table-price"
-                          id="cyrusPrice">
+                          id="pluslinkPrice"
+                        >
                           <thead>
                             <tr>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Kode Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Nama Produk
                               </th>
                               <th
-                                class="px-4 py-2 bg-gray-200 uppercase text-left">
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
+                                Harga
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="px-4 py-2 text-center" colspan="3">
+                                Cari data!!
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </li>
+                    <!-- Acording 7 -->
+                    <li
+                      class="relative border-b border-gray-200 mb-2"
+                      x-data="{selected:null}"
+                    >
+                      <button
+                        type="button"
+                        class="w-full px-2 py-3 text-left"
+                        @click="selected !== 5 ? selected = 5 : selected = null"
+                      >
+                        <div class="flex items-center justify-between">
+                          <span class="font-bold text-lg uppercase">cyrus</span>
+                          <span
+                            x-html="selected !== 5 ? '+' : '-'"
+                            class="font-bold text-lg"
+                          ></span>
+                        </div>
+                      </button>
+                      <div
+                        class="relative overflow-hidden transition-all max-h-0 duration-700"
+                        style=""
+                        x-ref="table5"
+                        x-bind:style="selected == 5 ? 'max-height: ' + $refs.table5.scrollHeight + 'px' : ''"
+                      >
+                        <table
+                          class="w-full table-auto table-price"
+                          id="cyrusPrice"
+                        >
+                          <thead>
+                            <tr>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
+                                Kode Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
+                                Nama Produk
+                              </th>
+                              <th
+                                class="px-4 py-2 bg-gray-200 uppercase text-left"
+                              >
                                 Harga
                               </th>
                             </tr>
@@ -565,7 +692,8 @@
               <div class="loader-1"></div>
               <button
                 class="uppercase bg-red-500 p-2 rounded text-white"
-                id="cancel-loading">
+                id="cancel-loading"
+              >
                 Cancel
               </button>
             </div>
@@ -576,21 +704,25 @@
           <section id="login" class="hidden">
             <h1
               :class="sidebarOpen? 'text-3xl' : 'text-sm'"
-              class="text-black font-bold py-5 px-2 transition-all duration-500">
+              class="text-black font-bold py-5 px-2 transition-all duration-500"
+            >
               Login
             </h1>
             <div class="flex flex-row flex-wrap w-full">
               <!-- Awal Card 1 -->
               <div class="w-1/4 p-2">
                 <div
-                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
+                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative"
+                >
                   <span
-                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
+                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"
+                  ></span>
                   <form
                     action=""
                     method="post"
                     id="hotspot"
-                    data-form-action="login">
+                    data-form-action="login"
+                  >
                     <h2 class="text-center text-2xl font-bold uppercase">
                       hotspot
                     </h2>
@@ -600,7 +732,8 @@
                         type="text"
                         name="username"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
@@ -608,18 +741,21 @@
                         type="password"
                         name="password"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <button
                       type="submit"
                       class="block mt-4 mx-auto p-2 rounded uppercase bg-slate-300 text-white"
-                      data-status="login">
+                      data-status="login"
+                    >
                       login
                     </button>
                     <button
                       type="submit"
                       class="hidden mt-4 mx-auto p-2 rounded uppercase bg-red-500 text-white"
-                      data-status="logout">
+                      data-status="logout"
+                    >
                       logout
                     </button>
                   </form>
@@ -630,14 +766,17 @@
               <!-- Awal Card 2 -->
               <div class="w-1/4 p-2">
                 <div
-                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
+                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative"
+                >
                   <span
-                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
+                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"
+                  ></span>
                   <form
                     action=""
                     method="post"
                     id="monitoringBsi"
-                    data-form-action="login">
+                    data-form-action="login"
+                  >
                     <h2 class="text-center text-2xl font-bold uppercase">
                       Monitoring Bsi
                     </h2>
@@ -647,7 +786,8 @@
                         type="text"
                         name="username"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
@@ -655,18 +795,21 @@
                         type="password"
                         name="password"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <button
                       type="submit"
                       class="block mt-4 mx-auto p-2 rounded uppercase bg-slate-300 text-white"
-                      data-status="login">
+                      data-status="login"
+                    >
                       login
                     </button>
                     <button
                       type="submit"
                       class="hidden mt-4 mx-auto p-2 rounded uppercase bg-red-500 text-white"
-                      data-status="logout">
+                      data-status="logout"
+                    >
                       logout
                     </button>
                   </form>
@@ -677,14 +820,17 @@
               <!-- Awal Card 3 -->
               <div class="w-1/4 p-2">
                 <div
-                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
+                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative"
+                >
                   <span
-                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
+                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"
+                  ></span>
                   <form
                     action=""
                     method="post"
                     id="kopnus"
-                    data-form-action="login">
+                    data-form-action="login"
+                  >
                     <h2 class="text-center text-2xl font-bold uppercase">
                       kopnus
                     </h2>
@@ -694,7 +840,8 @@
                         type="text"
                         name="username"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
@@ -702,18 +849,21 @@
                         type="password"
                         name="password"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <button
                       type="submit"
                       class="block mt-4 mx-auto p-2 rounded uppercase bg-slate-300 text-white"
-                      data-status="login">
+                      data-status="login"
+                    >
                       login
                     </button>
                     <button
                       type="submit"
                       class="hidden mt-4 mx-auto p-2 rounded uppercase bg-red-500 text-white"
-                      data-status="logout">
+                      data-status="logout"
+                    >
                       logout
                     </button>
                   </form>
@@ -724,14 +874,17 @@
               <!-- Awal Card 4 -->
               <div class="w-1/4 p-2">
                 <div
-                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
+                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative"
+                >
                   <span
-                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
+                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"
+                  ></span>
                   <form
                     action=""
                     method="post"
                     id="pluslink"
-                    data-form-action="login">
+                    data-form-action="login"
+                  >
                     <h2 class="text-center text-2xl font-bold uppercase">
                       pluslink
                     </h2>
@@ -741,7 +894,8 @@
                         type="text"
                         name="username"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
@@ -749,18 +903,21 @@
                         type="password"
                         name="password"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <button
                       type="submit"
                       class="block mt-4 mx-auto p-2 rounded uppercase bg-slate-300 text-white"
-                      data-status="login">
+                      data-status="login"
+                    >
                       login
                     </button>
                     <button
                       type="submit"
                       class="hidden mt-4 mx-auto p-2 rounded uppercase bg-red-500 text-white"
-                      data-status="logout">
+                      data-status="logout"
+                    >
                       logout
                     </button>
                   </form>
@@ -771,14 +928,17 @@
               <!-- Awal Card 5 -->
               <div class="w-1/4 p-2">
                 <div
-                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
+                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative"
+                >
                   <span
-                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
+                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"
+                  ></span>
                   <form
                     action=""
                     method="post"
                     id="gamma"
-                    data-form-action="login">
+                    data-form-action="login"
+                  >
                     <h2 class="text-center text-2xl font-bold uppercase">
                       gamma
                     </h2>
@@ -788,7 +948,8 @@
                         type="text"
                         name="username"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
@@ -796,18 +957,21 @@
                         type="password"
                         name="password"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <button
                       type="submit"
                       class="block mt-4 mx-auto p-2 rounded uppercase bg-slate-300 text-white"
-                      data-status="login">
+                      data-status="login"
+                    >
                       login
                     </button>
                     <button
                       type="submit"
                       class="hidden mt-4 mx-auto p-2 rounded uppercase bg-red-500 text-white"
-                      data-status="logout">
+                      data-status="logout"
+                    >
                       logout
                     </button>
                   </form>
@@ -818,14 +982,17 @@
               <!-- Awal Card 6 -->
               <div class="w-1/4 p-2">
                 <div
-                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
+                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative"
+                >
                   <span
-                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
+                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"
+                  ></span>
                   <form
                     action=""
                     method="post"
                     id="cyrus"
-                    data-form-action="login">
+                    data-form-action="login"
+                  >
                     <h2 class="text-center text-2xl font-bold uppercase">
                       cyrus
                     </h2>
@@ -835,7 +1002,8 @@
                         type="text"
                         name="username"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
@@ -843,18 +1011,21 @@
                         type="password"
                         name="password"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <button
                       type="submit"
                       class="block mt-4 mx-auto p-2 rounded uppercase bg-slate-300 text-white"
-                      data-status="login">
+                      data-status="login"
+                    >
                       login
                     </button>
                     <button
                       type="submit"
                       class="hidden mt-4 mx-auto p-2 rounded uppercase bg-red-500 text-white"
-                      data-status="logout">
+                      data-status="logout"
+                    >
                       logout
                     </button>
                   </form>
@@ -865,14 +1036,17 @@
               <!-- Awal Card 7 -->
               <div class="w-1/4 p-2">
                 <div
-                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
+                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative"
+                >
                   <span
-                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
+                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"
+                  ></span>
                   <form
                     action=""
                     method="post"
                     id="kepooH2h"
-                    data-form-action="login">
+                    data-form-action="login"
+                  >
                     <h2 class="text-center text-2xl font-bold uppercase">
                       kepoo h2h
                     </h2>
@@ -882,7 +1056,8 @@
                         type="text"
                         name="username"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
@@ -890,18 +1065,21 @@
                         type="password"
                         name="password"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <button
                       type="submit"
                       class="block mt-4 mx-auto p-2 rounded uppercase bg-slate-300 text-white"
-                      data-status="login">
+                      data-status="login"
+                    >
                       login
                     </button>
                     <button
                       type="submit"
                       class="hidden mt-4 mx-auto p-2 rounded uppercase bg-red-500 text-white"
-                      data-status="logout">
+                      data-status="logout"
+                    >
                       logout
                     </button>
                   </form>
@@ -912,9 +1090,11 @@
               <!-- Awal Card 8 -->
               <div class="w-1/4 p-2">
                 <div
-                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative">
+                  class="flex flex-col border border-collapse shadow w-full rounded p-4 relative"
+                >
                   <span
-                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"></span>
+                    class="w-6 h-6 bg-slate-300 rounded-full absolute top-1 right-1"
+                  ></span>
                   <form action="" method="post" data-form-action="login">
                     <h2 class="text-center text-2xl font-bold uppercase">
                       Cooming Soon
@@ -925,7 +1105,8 @@
                         type="text"
                         name="username"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <div class="flex flex-col w-full mt-2">
                       <label for="" class="font-thin mb-1">Password</label>
@@ -933,18 +1114,21 @@
                         type="password"
                         name="password"
                         class="border rounded outline-none py-1 px-2"
-                        required />
+                        required
+                      />
                     </div>
                     <button
                       type="submit"
                       class="block mt-4 mx-auto p-2 rounded uppercase bg-slate-300 text-white"
-                      data-status="login">
+                      data-status="login"
+                    >
                       login
                     </button>
                     <button
                       type="submit"
                       class="hidden mt-4 mx-auto p-2 rounded uppercase bg-red-500 text-white"
-                      data-status="logout">
+                      data-status="logout"
+                    >
                       logout
                     </button>
                   </form>
@@ -959,19 +1143,23 @@
           <section id="logs" class="hidden">
             <h1
               :class="sidebarOpen? 'text-3xl' : 'text-sm'"
-              class="text-black font-bold py-5 px-2 transition-all duration-500">
+              class="text-black font-bold py-5 px-2 transition-all duration-500"
+            >
               Logs
             </h1>
             <table
-              class="border-spacing-4 w-full border-b-2 border-neutral-950">
+              class="border-spacing-4 w-full border-b-2 border-neutral-950"
+            >
               <thead class="sticky top-0 bg-lime-200">
                 <tr>
                   <th
-                    class="border-b font-medium px-2 text-neutral-500 text-left w-1/5">
+                    class="border-b font-medium px-2 text-neutral-500 text-left w-1/5"
+                  >
                     Timestamps
                   </th>
                   <th
-                    class="border-b font-medium px-2 py-3 text-neutral-500 text-left w-4/5">
+                    class="border-b font-medium px-2 py-3 text-neutral-500 text-left w-4/5"
+                  >
                     Messages
                   </th>
                 </tr>

@@ -84,7 +84,6 @@ const createWindow = () => {
     const monitoringBsiPrice = await handleMonitoringBsiGetPriceLists(data);
     const cyrusPrice = await handleCyrusPriceLists(data);
     const kepoH2hPrice = await handleKepooH2hPriceLists(data);
-    console.log(kepoH2hPrice);
     const resultPriceLists = {
       hotspotPrice,
       kopnusPrice,
@@ -92,6 +91,7 @@ const createWindow = () => {
       pluslinkPrice,
       monitoringBsiPrice,
       cyrusPrice,
+      kepoH2hPrice,
     };
     mainWindow.send("res-price-lists", resultPriceLists);
   });
