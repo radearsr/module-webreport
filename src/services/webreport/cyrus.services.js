@@ -42,7 +42,6 @@ const getPriceLists = async (cookieKey, cookieValue) => {
       Cookie: `CSYSBLAZTCUSTOMER=autologin=; ${cookieKey}=${cookieValue}`,
     },
   };
-
   const response = await axios(config);
   const html = response.data;
 

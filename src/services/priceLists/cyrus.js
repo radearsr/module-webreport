@@ -7,7 +7,7 @@ const sortingPriceListByName = async (name) => {
     const list = await dbService.readListByTitle("cyrus");
     if (!list) throw new Error("CYRUS_LIST_NOT_FOUND");
     const auth = await dbService.readAuthByListId(list.id);
-    const [cookieKey, cookieValue] = auth.token; 
+    const [cookieKey, cookieValue] = auth.token.split("&-&"); 
     const priceLists = await getPriceLists(cookieKey, cookieValue);
     let keyword = name.toLowerCase();
     const getDataPrice = JSON.parse(priceLists);
