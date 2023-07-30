@@ -1,27 +1,26 @@
 const {
   getPriceLists,
-  postLoginWeb,
 } = require("../webreport/monitoringBsi.services");
 const dbService = require("../database/sqlite.services");
 const loggingUtils = require("../../utils/logging/logging.utils");
 
 const sortingPriceListByName = async (name) => {
   try {
-    const list = await dbService.readListByTitle("monitoringBsi");
+    const list = dbService.readListByTitle("monitoringBsi");
     if (!list) throw new Error("MONITORINGBSI_LIST_NOT_FOUND");
-    const auth = await dbService.readAuthByListId(list.id);
+    const auth = dbService.readAuthByListId(list.id);
     const [token, dataAcc] = auth.token.split("&-&");
     const priceLists = await getPriceLists(token, dataAcc);
 
     if (!priceLists?.token) {
-      await dbService.updateListStatus(list.id, false);
+      dbService.updateListStatus(list.id, false);
       return;
     }
 
     if (!priceLists?.data) throw new Error("MONITORINGBSI_DATA_NOT_FOUND");
 
     const newTokenFormat = `${priceLists.token}&-&${dataAcc}`;
-    await dbService.updateAuthByListId(list.id, newTokenFormat);
+    dbService.updateAuthByListId(list.id, newTokenFormat);
     const getDataPrice = priceLists.data;
     let keyword = name.toLowerCase();
     const resultMapped = [];

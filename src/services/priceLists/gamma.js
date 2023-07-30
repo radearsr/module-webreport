@@ -4,9 +4,9 @@ const loggingUtils = require("../../utils/logging/logging.utils");
 
 const sortingPriceListByName = async (name) => {
   try {
-    const list = await dbService.readListByTitle("gamma");
+    const list = dbService.readListByTitle("gamma");
     if (!list) throw new Error("GAMMA_LIST_NOT_FOUND");
-    const auth = await dbService.readAuthByListId(list.id);
+    const auth = dbService.readAuthByListId(list.id);
     const priceLists = await getPriceLists(auth.token);
     const getDataPrice = priceLists.data.body;
     let keyword = name.toLowerCase();
@@ -46,8 +46,8 @@ const sortingPriceListByName = async (name) => {
       // Error Unauthorize
     } else if (error.response && error.response.status === 401) {
       try {
-        const list = await dbService.readListByTitle("gamma");
-        await dbService.updateListStatus(list.id, false);
+        const list = dbService.readListByTitle("gamma");
+        dbService.updateListStatus(list.id, false);
       } catch (dbError) {
         loggingUtils.showLogging("ERROR", dbError.stack);
       }
