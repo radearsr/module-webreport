@@ -1,7 +1,7 @@
 {
-  "name": "modul-webreport",
+  "name": "ModuleWebreports",
   "version": "1.0.0",
-  "description": "",
+  "description": "Module webreports",
   "main": "./src/main.js",
   "scripts": {
     "tw-build:watch": "npx tailwindcss -i ./src/css/input.css -o ./public/styles.css --watch",
@@ -12,23 +12,22 @@
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
-    "productName": "Module_Web_Reports",
+    "productName": "Module Web Reports",
     "win": {
-      "artifactName": "${productName}_${version}.${ext}"
+      "icon": "src/assets/report.png",
+      "artifactName": "${productName} v${version}.${ext}"
     }
   },
   "keywords": [],
-  "author": "",
+  "author": "RSR x GIAN",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.4.0",
     "better-sqlite3": "^8.5.0",
     "cheerio": "^1.0.0-rc.12",
     "crypto-js": "^4.1.1",
-    "node-fetch": "^3.3.1",
     "puppeteer": "^20.8.2",
-    "qs": "^6.11.2",
-    "tough-cookie": "^4.1.3"
+    "qs": "^6.11.2"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.2.1",

@@ -41,16 +41,23 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     title: `Module Web Reports v${packageJson.version}`,
     autoHideMenuBar: true,
-    width: 1200,
+    width: 1300,
     height: 800,
     webPreferences: {
       preload: path.join(__dirname, "./webPreferences/preload.js"),
     },
+    titleBarStyle: "hidden",
+    titleBarOverlay: {
+      color: "#FFFFFF",
+      symbolColor: "#000000",
+      height: 30
+    },
+    icon: path.join(__dirname, "./assets/report.png"),
   });
 
   logConsoleOutput(mainWindow);
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   ipcMain.on("req-login-auth", async (event, data) => {
     const { formId } = data;
