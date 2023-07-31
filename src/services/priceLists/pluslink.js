@@ -128,7 +128,6 @@ const sortingPriceListByName = async (name) => {
     if (error.message === "PLUSLINK_DATA_NOT_FOUND") {
       loggingUtils.showLogging("ERROR", error.message);
       return [];
-
       // Error Unauthorize
     } else if (error.response && error.response.status === 401) {
       try {

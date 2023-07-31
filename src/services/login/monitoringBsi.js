@@ -8,7 +8,7 @@ const handleMonitoringBsi = async (title, data, electronMainProccess) => {
     loggingService.showLogging("INFO", JSON.stringify(data));
     const availableLists = await dbService.readListByTitle(title);
     if (!availableLists) {
-      await dbService.createLists(title, username, password);
+      dbService.createLists(title, username, password);
     }
     const list = await dbService.readListByTitle(title);
     loggingService.showLogging("WARN", JSON.stringify(list));

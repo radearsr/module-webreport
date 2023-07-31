@@ -1,6 +1,5 @@
 const {
   getPriceLists,
-  postLoginWeb,
 } = require("../webreport/monitoringBsi.services");
 const dbService = require("../database/sqlite.services");
 const loggingUtils = require("../../utils/logging/logging.utils");

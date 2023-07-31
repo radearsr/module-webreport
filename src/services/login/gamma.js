@@ -8,7 +8,7 @@ const handleGamaForm = async (title, data, electronMainProccess) => {
     loggingUtils.showLogging("INFO", JSON.stringify(data));
     const availableLists = await dbService.readListByTitle(title);
     if (!availableLists) {
-      await dbService.createLists(title, username, password);
+      dbService.createLists(title, username, password);
     }
     const list = await dbService.readListByTitle(title);
     loggingUtils.showLogging("WARN", JSON.stringify(list));
@@ -19,7 +19,7 @@ const handleGamaForm = async (title, data, electronMainProccess) => {
     }
     const loginResponse = await postLoginWeb(username, password);
     loggingUtils.showLogging("INFO", JSON.stringify(loginResponse.data));
-    const token = loginResponse?.data?.body?.secret;
+    const token = await loginResponse?.data?.body?.secret;
     if (!token) throw new Error("INVALID_TOKEN");
     const availableToken = await dbService.readAuthByListId(list.id);
     if (!availableToken) {

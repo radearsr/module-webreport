@@ -11,7 +11,7 @@ const sortingPriceListByName = async (name) => {
     loggingUtils.showLogging("WARN", JSON.stringify(auth));
     const priceLists = await getPriceLists(auth.token);
     if (priceLists.msg === "Unauthorize") {
-      await dbService.updateListStatus(list.id, false);
+      dbService.updateListStatus(list.id, false);
     }
     // Dana Product
     if (keyword === "dana") {

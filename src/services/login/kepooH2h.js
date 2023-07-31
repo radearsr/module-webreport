@@ -8,7 +8,7 @@ const handleLoginKepooH2h = async (title, data, electronMainProccess) => {
     loggingUtils.showLogging("INFO", JSON.stringify(data));
     const availableLists = await dbService.readListByTitle(title);
     if (!availableLists) {
-      await dbService.createLists(title, username, password);
+      dbService.createLists(title, username, password);
     }
     const list = await dbService.readListByTitle(title);
     loggingUtils.showLogging("WARN", JSON.stringify(list));
@@ -33,7 +33,6 @@ const handleLoginKepooH2h = async (title, data, electronMainProccess) => {
       formId: title,
     });
   } catch (error) {
-    console.error(error);
     loggingUtils.showLogging("ERROR", error.stack);
   }
 };
