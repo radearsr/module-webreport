@@ -6,11 +6,11 @@ const handleLoginKepooH2h = async (title, data, electronMainProccess) => {
   const { username, password } = data;
   try {
     loggingUtils.showLogging("INFO", JSON.stringify(data));
-    const availableLists = dbService.readListByTitle(title);
+    const availableLists = await dbService.readListByTitle(title);
     if (!availableLists) {
       dbService.createLists(title, username, password);
     }
-    const list = dbService.readListByTitle(title);
+    const list = await dbService.readListByTitle(title);
     loggingUtils.showLogging("WARN", JSON.stringify(list));
     if (list.status) {
       return electronMainProccess.send("res-login-auth", {
@@ -22,13 +22,13 @@ const handleLoginKepooH2h = async (title, data, electronMainProccess) => {
     const token = loginResponse?.token;
     const cookie = loginResponse?.cookie;
     if (!token || !cookie) throw new Error("INVALID_TOKEN");
-    const availableToken = dbService.readAuthByListId(list.id);
+    const availableToken = await dbService.readAuthByListId(list.id);
     const newTokenFormat = `${token}&-&${cookie}`;
     if (!availableToken) {
-      dbService.createAuth(list.id, newTokenFormat);
+      await dbService.createAuth(list.id, newTokenFormat);
     }
-    dbService.updateAuthByListId(list.id, newTokenFormat);
-    dbService.updateListStatus(list.id, true);
+    await dbService.updateAuthByListId(list.id, newTokenFormat);
+    await dbService.updateListStatus(list.id, true);
     electronMainProccess.send("res-login-auth", {
       formId: title,
     });

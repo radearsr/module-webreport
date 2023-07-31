@@ -6,11 +6,11 @@ const handleKopnus = async (title, data, electronMainProccess) => {
   const { username, password } = data;
   try {
     loggingService.showLogging("INFO", JSON.stringify(data));
-    const availableLists = dbService.readListByTitle(title);
+    const availableLists = await dbService.readListByTitle(title);
     if (!availableLists) {
       dbService.createLists(title, username, password);
     }
-    const list = dbService.readListByTitle(title);
+    const list = await dbService.readListByTitle(title);
     loggingService.showLogging("WARN", JSON.stringify(list));
     if (list.status) {
       return electronMainProccess.send("res-login-auth", {
@@ -21,12 +21,12 @@ const handleKopnus = async (title, data, electronMainProccess) => {
     loggingService.showLogging("INFO", JSON.stringify(loginResponse));
     const token = loginResponse?.token;
     if (!token) throw new Error("INVALID_TOKEN");
-    const availableToken = dbService.readAuthByListId(list.id);
+    const availableToken = await dbService.readAuthByListId(list.id);
     if (!availableToken) {
-      dbService.createAuth(list.id, token);
+      await dbService.createAuth(list.id, token);
     }
-    dbService.updateAuthByListId(list.id, token);
-    dbService.updateListStatus(list.id, true);
+    await dbService.updateAuthByListId(list.id, token);
+    await dbService.updateListStatus(list.id, true);
     electronMainProccess.send("res-login-auth", {
       formId: title,
     });

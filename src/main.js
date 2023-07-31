@@ -41,7 +41,8 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     title: `Module Web Reports v${packageJson.version}`,
     autoHideMenuBar: true,
-    fullscreen: true,
+    width: 1200,
+    height: 800,
     webPreferences: {
       preload: path.join(__dirname, "./webPreferences/preload.js"),
     },

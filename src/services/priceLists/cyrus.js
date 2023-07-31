@@ -4,9 +4,9 @@ const loggingUtils = require("../../utils/logging/logging.utils");
 
 const sortingPriceListByName = async (name) => {
   try {
-    const list = dbService.readListByTitle("cyrus");
+    const list = await dbService.readListByTitle("cyrus");
     if (!list) throw new Error("CYRUS_LIST_NOT_FOUND");
-    const auth = dbService.readAuthByListId(list.id);
+    const auth = await dbService.readAuthByListId(list.id);
     const [cookieKey, cookieValue] = auth.token.split("&-&"); 
     const priceLists = await getPriceLists(cookieKey, cookieValue);
     let keyword = name.toLowerCase();
@@ -34,8 +34,8 @@ const sortingPriceListByName = async (name) => {
 
     } else if (error.message === "CYRUS_NOT_UNAUTHORIZE") {
       try {
-        const list = dbService.readListByTitle("cyrus");
-        dbService.updateListStatus(list.id, false);
+        const list = await dbService.readListByTitle("cyrus");
+        await dbService.updateListStatus(list.id, false);
       } catch (dbError) {
         loggingUtils.showLogging("ERROR", dbError.stack);
       }

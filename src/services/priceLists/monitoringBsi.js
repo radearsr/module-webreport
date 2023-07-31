@@ -6,21 +6,21 @@ const loggingUtils = require("../../utils/logging/logging.utils");
 
 const sortingPriceListByName = async (name) => {
   try {
-    const list = dbService.readListByTitle("monitoringBsi");
+    const list = await dbService.readListByTitle("monitoringBsi");
     if (!list) throw new Error("MONITORINGBSI_LIST_NOT_FOUND");
-    const auth = dbService.readAuthByListId(list.id);
+    const auth = await dbService.readAuthByListId(list.id);
     const [token, dataAcc] = auth.token.split("&-&");
     const priceLists = await getPriceLists(token, dataAcc);
 
     if (!priceLists?.token) {
-      dbService.updateListStatus(list.id, false);
+      await dbService.updateListStatus(list.id, false);
       return;
     }
 
     if (!priceLists?.data) throw new Error("MONITORINGBSI_DATA_NOT_FOUND");
 
     const newTokenFormat = `${priceLists.token}&-&${dataAcc}`;
-    dbService.updateAuthByListId(list.id, newTokenFormat);
+    await dbService.updateAuthByListId(list.id, newTokenFormat);
     const getDataPrice = priceLists.data;
     let keyword = name.toLowerCase();
     const resultMapped = [];

@@ -4,9 +4,9 @@ const loggingUtils = require("../../utils/logging/logging.utils");
 
 const sortingPriceListByName = async (name) => {
   try {
-    const list = dbService.readListByTitle("pluslink");
+    const list = await dbService.readListByTitle("pluslink");
     if (!list) throw new Error("PLUSLINK_LIST_NOT_FOUND");
-    const auth = dbService.readAuthByListId(list.id);
+    const auth = await dbService.readAuthByListId(list.id);
     const priceLists = await getPriceLists(auth.token);
     const getDataPrice = priceLists.data;
     let keyword = name.toLowerCase();
@@ -128,12 +128,11 @@ const sortingPriceListByName = async (name) => {
     if (error.message === "PLUSLINK_DATA_NOT_FOUND") {
       loggingUtils.showLogging("ERROR", error.message);
       return [];
-
       // Error Unauthorize
     } else if (error.response && error.response.status === 401) {
       try {
-        const list = dbService.readListByTitle("pluslink");
-        dbService.updateListStatus(list.id, false);
+        const list = await dbService.readListByTitle("pluslink");
+        await dbService.updateListStatus(list.id, false);
       } catch (dbError) {
         loggingUtils.showLogging("ERROR", dbError.stack);
       }

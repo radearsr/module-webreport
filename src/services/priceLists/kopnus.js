@@ -5,9 +5,9 @@ const loggingUtils = require("../../utils/logging/logging.utils");
 const sortingPriceListByName = async (name) => {
   try {
     const keyword = name.toLowerCase();
-    const list = dbService.readListByTitle("kopnus");
+    const list = await dbService.readListByTitle("kopnus");
     if (!list) throw new Error("KOPNUS_LIST_NOT_FOUND");
-    const auth = dbService.readAuthByListId(list.id);
+    const auth = await dbService.readAuthByListId(list.id);
     loggingUtils.showLogging("WARN", JSON.stringify(auth));
     const priceLists = await getPriceLists(auth.token);
     if (priceLists.msg === "Unauthorize") {

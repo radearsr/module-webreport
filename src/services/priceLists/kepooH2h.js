@@ -5,9 +5,9 @@ const loggingUtils = require("../../utils/logging/logging.utils");
 
 const sortingPriceListByName = async (name) => {
   try {
-    const list = dbService.readListByTitle("kepooH2h");
+    const list = await dbService.readListByTitle("kepooH2h");
     if (!list) throw new Error("KEPOH2H_LIST_NOT_FOUND");
-    const auth = dbService.readAuthByListId(list.id);
+    const auth = await dbService.readAuthByListId(list.id);
     loggingUtils.showLogging("WARN", JSON.stringify(auth));
     const [token, cookie] = auth.token.split("&-&");
     let keyword = name.toLowerCase();
@@ -86,8 +86,8 @@ const sortingPriceListByName = async (name) => {
   } catch (error) {
     if (error.response && error.response.status === 419) {
       try {
-        const list = dbService.readListByTitle("kepooH2h");
-        dbService.updateListStatus(list.id, false);
+        const list = await dbService.readListByTitle("kepooH2h");
+        await dbService.updateListStatus(list.id, false);
       } catch (dbError) {
         loggingUtils.showLogging("ERROR", dbError.stack);
       }

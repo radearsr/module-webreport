@@ -6,12 +6,13 @@ const sortingPriceListByName = async (name) => {
   try {
     const keyword = name.toLowerCase();
     const list = dbService.readListByTitle("hotspot");
+    loggingUtils.showLogging("WARN", JSON.stringify(list));
     if (!list) throw new Error("HOTSPOT_LIST_NOT_FOUND");
-    const auth = dbService.readAuthByListId(list.id);
+    const auth = await dbService.readAuthByListId(list.id);
     loggingUtils.showLogging("WARN", JSON.stringify(auth));
     const priceLists = await getPriceLists(auth.token);
-    if (priceLists.msg === "Unauthorize") {
-      dbService.updateListStatus(list.id, false);
+    if (priceLists.msg === "Unauthorize" || priceLists.msg === "InvalidTokenError") {
+      await dbService.updateListStatus(list.id, false);
     }
 
     // Gopay Product

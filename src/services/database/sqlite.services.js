@@ -1,7 +1,6 @@
 const sqlite3 = require("better-sqlite3");
 const path = require("path");
-
-const databasePath = path.join(__dirname, "webreport.db");
+const databasePath = "webreport.db";
 
 const checkAndCreateAllTable = () => {
   const db = sqlite3(databasePath);
@@ -34,11 +33,12 @@ const readListByTitle = (title) => {
   const readStatement = db.prepare(querySelect);
   const lists = readStatement.get(dataToSelect);
   db.close();
-  // console.log(lists);
+  // console.log({ lists });
   return lists;
 };
 
 const createAuth = async (listId, token) => {
+  console.log("CREATED");
   checkAndCreateAllTable();
   const db = sqlite3(databasePath);
   const queryInsert = "INSERT INTO auth (id_list, token) VALUES (?, ?)";
@@ -46,11 +46,12 @@ const createAuth = async (listId, token) => {
   const createStatement = db.prepare(queryInsert)
   const createdAuth = createStatement.run(dataToInsert);
   db.close();
-  // console.log(createdAuth);
+  // console.log({ createdAuth });
   return createdAuth;
 };
 
 const updateListStatus = async (listId, status) => {
+  console.log("UPDATE");
   checkAndCreateAllTable();
   const db = sqlite3(databasePath);
   status = status ? 1 : 0;
@@ -63,7 +64,7 @@ const updateListStatus = async (listId, status) => {
   return updatedList;
 };
 
-const updateListStatusByTitle = async(title, status) => {
+const updateListStatusByTitle = async (title, status) => {
   checkAndCreateAllTable();
   const db = sqlite3(databasePath);
   status = status ? 1 : 0;
@@ -95,7 +96,7 @@ const readAuthByListId = async (listId) => {
   const readStatement = db.prepare(querySelect);
   const auth = readStatement.get(dataToSelect);
   db.close();
-  // console.log(auth);
+  // console.log({ auth });
   return auth;
 };
 
