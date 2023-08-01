@@ -5,7 +5,7 @@ const qs = require("qs");
 
 const postLoginWeb = async (username, password) => {
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: "new"
   });
   const page = await browser.newPage();
   // Perform actions on the page
