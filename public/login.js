@@ -93,7 +93,7 @@ electronAPI.resLoginStatus((lists) => {
       username.disabled = false;
       username.classList.remove("bg-gray-200");
       password.disabled = false;
-      username.classList.remove("bg-gray-200");
+      password.classList.remove("bg-gray-200");
     } else {
       form.dataset.formAction = "logout";
 
