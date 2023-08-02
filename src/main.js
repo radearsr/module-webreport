@@ -58,7 +58,6 @@ const createWindow = () => {
   logConsoleOutput(mainWindow);
 
   // mainWindow.webContents.openDevTools();
-
   ipcMain.on("req-login-auth", async (event, data) => {
     const { formId } = data;
     if (formId === "gamma") {
