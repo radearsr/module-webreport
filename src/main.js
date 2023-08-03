@@ -52,12 +52,12 @@ const createWindow = () => {
       symbolColor: "#000000",
       height: 30
     },
-    icon: path.join(__dirname, "./assets/report.png"),
+    icon: path.join(__dirname, "./assets/report.ico"),
   });
 
   logConsoleOutput(mainWindow);
 
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
   ipcMain.on("req-login-auth", async (event, data) => {
     const { formId } = data;
     if (formId === "gamma") {

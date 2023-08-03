@@ -2,7 +2,7 @@ body {
   -webkit-app-region: drag;
 }
 
-section > h1 {
+section>h1 {
   -webkit-app-region: drag;
 }
 
@@ -12,4 +12,8 @@ section {
 
 nav {
   -webkit-app-region: no-drag;
+}
+
+::-webkit-scrollbar {
+  -webkit-app-region: drag;
 }

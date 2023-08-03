@@ -3,6 +3,9 @@ const tables = document.querySelectorAll(".table-price");
 const loading = document.getElementById("analytics-loading-data");
 const cancelLoading = document.getElementById("cancel-loading");
 
+const formFilterData = document.getElementById("filterData");
+let PRICE_DATAS;
+
 cancelLoading.addEventListener("click", () => {
   loading.setAttribute("class", "hidden");
 });
@@ -48,6 +51,7 @@ const createTableRow = (kodeProduk, namaProduk, harga) => {
 
 electronAPI.resPriceLists((data) => {
   console.log(data);
+  PRICE_DATAS = data;
   let loopingIdx = 1;
   const tableLenght = tables.length;
   tables.forEach((table) => {
@@ -72,6 +76,52 @@ electronAPI.resPriceLists((data) => {
       return;
     }
     data[tableId].forEach((data) => {
+      const tr = createTableRow(data.kodeProduk, data.namaProduk, data.harga);
+      tbody.appendChild(tr);
+    });
+    if (loopingIdx === tableLenght - 1) {
+      loading.setAttribute("class", "hidden");
+    }
+  });
+});
+
+formFilterData.addEventListener("submit", (event) => {
+  event.preventDefault();
+  loading.setAttribute(
+    "class",
+    "container absolute top-0 bottom-0 right-0 left-0"
+  );
+  const formData = new FormData(event.target);
+  const keyword = formData.get("filterKeywords"); 
+  console.log(keyword);
+  if (!PRICE_DATAS) return "PRICE_DATA_NOT_FOUND";
+  console.log({PRICE_DATAS});
+  let loopingIdx = 1;
+  const tableLenght = tables.length;
+  tables.forEach((table) => {
+    loopingIdx++;
+    const tableId = table.getAttribute("id");
+    const tbody = table.querySelector("tbody");
+    tbody.innerHTML = "";
+    if (!PRICE_DATAS[tableId]) {
+      const tr = createTableRowNoContent("Mohon login ulang");
+      tbody.appendChild(tr);
+      if (loopingIdx === tableLenght - 1) {
+        loading.setAttribute("class", "hidden");
+      }
+      return;
+    }
+    const dataFiltered = PRICE_DATAS[tableId].filter((dataResult) => dataResult.kodeProduk.toLowerCase().includes(keyword.toLowerCase()));
+    console.log({dataFiltered});
+    if (dataFiltered.length < 1) {
+      const tr = createTableRowNoContent("Data Tidak Ditemukan");
+      tbody.appendChild(tr);
+      if (loopingIdx === tableLenght - 1) {
+        loading.setAttribute("class", "hidden");
+      }
+      return;
+    }
+    dataFiltered.forEach((data) => {
       const tr = createTableRow(data.kodeProduk, data.namaProduk, data.harga);
       tbody.appendChild(tr);
     });

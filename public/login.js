@@ -1,4 +1,4 @@
-const forms = document.querySelectorAll("form");
+const forms = document.querySelectorAll("form:not(form#filterData)");
 
 forms.forEach((form) => {
   form.addEventListener("submit", (event) => {

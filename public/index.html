@@ -135,6 +135,23 @@
               class="text-black font-bold py-5 px-2 transition-all duration-500">
               Analytics
             </h1>
+            <form id="filterData" class="w-full mb-4">
+              <div class="w-1/2 mx-auto flex flex-row gap-2">
+                <input
+                  type="search"
+                  name="filterKeywords"
+                  class="border p-2 rounded w-3/4 mx-auto"
+                  placeholder="Cari kode produk..." />
+                <button
+                  type="submit"
+                  class="rounded p-2 w-1/4 text-white bg-lime-500 cursor-pointer hover:font-bold transition-all duration-200 text-[20px]">
+                  Filter
+                </button>
+              </div>
+              <p class="mx-auto text-center text-sm text-red-500">
+                *Filter hanya bisa dilakukan jika sudah mengklik kategori
+              </p>
+            </form>
             <div class="flex gap-x-3 rounded-md">
               <!-- E-Money -->
               <div
