@@ -85,6 +85,32 @@ electronAPI.resPriceLists((data) => {
   });
 });
 
+const noticesHandler = () => {
+  return {
+    notices: [],
+    visible: [],
+    add(notice) {
+      notice.id = Date.now();
+      this.notices.push(notice);
+      this.fire(notice.id);
+    },
+    fire(id) {
+      this.visible.push(this.notices.find((notice) => notice.id == id));
+      const timeShown = 2000 * this.visible.length;
+      setTimeout(() => {
+        this.remove(id);
+      }, timeShown);
+    },
+    remove(id) {
+      const notice = this.visible.find((notice) => notice.id == id);
+      const index = this.visible.indexOf(notice);
+      this.visible.splice(index, 1);
+    },
+  };
+};
+
+const notices = noticesHandler();
+
 formFilterData.addEventListener("submit", (event) => {
   event.preventDefault();
   loading.setAttribute(
@@ -92,10 +118,10 @@ formFilterData.addEventListener("submit", (event) => {
     "container absolute top-0 bottom-0 right-0 left-0"
   );
   const formData = new FormData(event.target);
-  const keyword = formData.get("filterKeywords"); 
+  const keyword = formData.get("filterKeywords");
   console.log(keyword);
   if (!PRICE_DATAS) return "PRICE_DATA_NOT_FOUND";
-  console.log({PRICE_DATAS});
+  console.log({ PRICE_DATAS });
   let loopingIdx = 1;
   const tableLenght = tables.length;
   tables.forEach((table) => {
@@ -111,8 +137,10 @@ formFilterData.addEventListener("submit", (event) => {
       }
       return;
     }
-    const dataFiltered = PRICE_DATAS[tableId].filter((dataResult) => dataResult.kodeProduk.toLowerCase().includes(keyword.toLowerCase()));
-    console.log({dataFiltered});
+    const dataFiltered = PRICE_DATAS[tableId].filter((dataResult) =>
+      dataResult.kodeProduk.toLowerCase().includes(keyword.toLowerCase())
+    );
+    console.log({ dataFiltered });
     if (dataFiltered.length < 1) {
       const tr = createTableRowNoContent("Data Tidak Ditemukan");
       tbody.appendChild(tr);
