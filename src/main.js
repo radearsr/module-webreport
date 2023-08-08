@@ -50,7 +50,7 @@ const createWindow = () => {
     titleBarOverlay: {
       color: "#FFFFFF",
       symbolColor: "#000000",
-      height: 30
+      height: 30,
     },
     icon: path.join(__dirname, "./assets/report.ico"),
   });
