@@ -5,11 +5,11 @@ passwordViews.forEach((passView) => {
   passView.addEventListener("click", (event) => {
     const currentAttr = event.target.previousElementSibling.getAttribute("type");
     if (currentAttr === "password") {
-      event.target.style.backgroundImage = "url('view.png')";
+      event.target.style.backgroundImage = "url('hide.png')";
       event.target.previousElementSibling.setAttribute("type", "text");
       return;
     }
-    event.target.style.backgroundImage = "url('hide.png')";
+    event.target.style.backgroundImage = "url('view.png')";
     event.target.previousElementSibling.setAttribute("type", "password");
   });
 });
