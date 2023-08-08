@@ -1,8 +1,29 @@
 const forms = document.querySelectorAll("form:not(form#filterData)");
+const passwordViews = document.querySelectorAll(".password-view");
+
+passwordViews.forEach((passView) => {
+  passView.addEventListener("click", (event) => {
+    const currentAttr = event.target.previousElementSibling.getAttribute("type");
+    if (currentAttr === "password") {
+      event.target.style.backgroundImage = "url('view.png')";
+      event.target.previousElementSibling.setAttribute("type", "text");
+      return;
+    }
+    event.target.style.backgroundImage = "url('hide.png')";
+    event.target.previousElementSibling.setAttribute("type", "password");
+  });
+});
 
 forms.forEach((form) => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
+
+    let buttonLogin = form.querySelector('button[data-status="login"');
+    buttonLogin.classList.remove("bg-lime-400");
+    buttonLogin.classList.remove("hover:bg-lime-500");
+    buttonLogin.classList.add("bg-slate-300");
+    buttonLogin.disabled = true;
+
     const formData = new FormData(form);
     const formId = form.getAttribute("id");
     const formAction = form.dataset.formAction;
@@ -54,6 +75,11 @@ electronAPI.resLogoutAuth((data) => {
 
   buttonLogin.classList.remove("hidden");
   buttonLogin.classList.add("block");
+  buttonLogin.classList.remove("bg-slate-300");
+  buttonLogin.classList.add("bg-lime-400");
+  buttonLogin.classList.add("hover:bg-lime-500");
+  buttonLogin.disabled = false;
+
   buttonLogout.classList.add("hidden");
   buttonLogout.classList.remove("block");
 
@@ -84,6 +110,11 @@ electronAPI.resLoginStatus((lists) => {
 
       buttonLogin.classList.remove("hidden");
       buttonLogin.classList.add("block");
+      buttonLogin.classList.remove("bg-slate-300");
+      buttonLogin.classList.add("bg-lime-400");
+      buttonLogin.classList.add("hover:bg-lime-500");
+      buttonLogin.disabled = false;
+
       buttonLogout.classList.add("hidden");
       buttonLogout.classList.remove("block");
 
@@ -99,6 +130,9 @@ electronAPI.resLoginStatus((lists) => {
 
       buttonLogin.classList.remove("block");
       buttonLogin.classList.add("hidden");
+      buttonLogin.classList.add("bg-slate-300");
+      buttonLogin.disabled = true;
+
       buttonLogout.classList.remove("hidden");
       buttonLogout.classList.add("block");
 
