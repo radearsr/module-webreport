@@ -50,7 +50,6 @@ const createTableRow = (kodeProduk, namaProduk, harga) => {
 };
 
 electronAPI.resPriceLists((data) => {
-  console.log(data);
   PRICE_DATAS = data;
   let loopingIdx = 1;
   const tableLenght = tables.length;
@@ -113,15 +112,12 @@ const notices = noticesHandler();
 
 formFilterData.addEventListener("submit", (event) => {
   event.preventDefault();
-  loading.setAttribute(
-    "class",
-    "container absolute top-0 bottom-0 right-0 left-0"
-  );
+  if (!PRICE_DATAS) {
+    alert("MOHON PILIH KATEGORI DULU");
+    return;
+  }
   const formData = new FormData(event.target);
   const keyword = formData.get("filterKeywords");
-  console.log(keyword);
-  if (!PRICE_DATAS) return "PRICE_DATA_NOT_FOUND";
-  console.log({ PRICE_DATAS });
   let loopingIdx = 1;
   const tableLenght = tables.length;
   tables.forEach((table) => {
@@ -133,7 +129,8 @@ formFilterData.addEventListener("submit", (event) => {
       const tr = createTableRowNoContent("Mohon login ulang");
       tbody.appendChild(tr);
       if (loopingIdx === tableLenght - 1) {
-        loading.setAttribute("class", "hidden");
+        alert(`Berhasil memfilter dengan kata kunci '${keyword}'`);
+        return;
       }
       return;
     }
@@ -145,7 +142,8 @@ formFilterData.addEventListener("submit", (event) => {
       const tr = createTableRowNoContent("Data Tidak Ditemukan");
       tbody.appendChild(tr);
       if (loopingIdx === tableLenght - 1) {
-        loading.setAttribute("class", "hidden");
+        alert(`Berhasil memfilter dengan kata kunci '${keyword}'`);
+        return;
       }
       return;
     }
@@ -154,7 +152,8 @@ formFilterData.addEventListener("submit", (event) => {
       tbody.appendChild(tr);
     });
     if (loopingIdx === tableLenght - 1) {
-      loading.setAttribute("class", "hidden");
+      alert(`Berhasil memfilter dengan kata kunci '${keyword}'`);
+      return;
     }
   });
 });
