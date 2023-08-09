@@ -33,6 +33,23 @@ contextBridge.exposeInMainWorld("electronAPI", {
       callback(priceLists);
     });
   },
+  reqNoteLists: () => {
+    ipcRenderer.send("req-notes-lists");
+  },
+  resNoteLists: (callback) => {
+    ipcRenderer.on("res-notes-lists", (_, noteLists) => {
+      callback(noteLists);
+    });
+  },
+  reqNoteSave: (data) => {
+    ipcRenderer.send("req-notes-save", data);
+  },
+  reqNoteDelete: (id) => {
+    ipcRenderer.send("req-notes-delete", id);
+  },
+  reqSwitchToLastWindow: () => {
+    ipcRenderer.send("switch-focus");
+  },
   onSystemLogging: (callback) => {
     ipcRenderer.on("system-logging", (_, systemLogging) => {
       callback(systemLogging);

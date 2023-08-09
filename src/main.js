@@ -19,6 +19,12 @@ const handleMonitoringBsiGetPriceLists = require("./services/priceLists/monitori
 const handleCyrusPriceLists = require("./services/priceLists/cyrus");
 const handleKepooH2hPriceLists = require("./services/priceLists/kepooH2h");
 
+const {
+  createOrUpdateNote,
+  deleteNotes,
+  getAllNotes,
+} = require("./services/notes/notes.services");
+
 const logConsoleOutput = (electronMainProc) => {
   const { stdout, stderr } = process;
 
@@ -35,6 +41,14 @@ const logConsoleOutput = (electronMainProc) => {
   stderr.write = (...args) => {
     originalStderrWrite(...args);
   };
+};
+
+const switchFocusToLastWindow = () => {
+  const windows = BrowserWindow.getAllWindows();
+  const lastWindow = windows[windows.length - 1];
+  if (lastWindow) {
+    lastWindow.focus();
+  }
 };
 
 const createWindow = () => {
@@ -58,7 +72,7 @@ const createWindow = () => {
   logConsoleOutput(mainWindow);
 
   mainWindow.webContents.openDevTools();
-  ipcMain.on("req-login-auth", async (event, data) => {
+  ipcMain.on("req-login-auth", async (_, data) => {
     const { formId } = data;
     if (formId === "gamma") {
       await handleGamaForm(formId, data, mainWindow);
@@ -83,7 +97,7 @@ const createWindow = () => {
     mainWindow.send("res-login-status", resultLists);
   });
 
-  ipcMain.on("req-price-lists", async (event, data) => {
+  ipcMain.on("req-price-lists", async (_, data) => {
     const gammaPrice = await handleGammaGetPriceLists(data);
     const hotspotPrice = await handleHotspotGetPriceLists(data);
     const kopnusPrice = await handleKopnusGetPriceLists(data);
@@ -103,11 +117,25 @@ const createWindow = () => {
     mainWindow.send("res-price-lists", resultPriceLists);
   });
 
-  ipcMain.on("req-logout-auth", async (event, data) => {
+  ipcMain.on("req-logout-auth", async (_, data) => {
     const { formId } = data;
     await dbServices.updateListStatusByTitle(formId, false);
     mainWindow.send("res-logout-auth", { formId });
   });
+
+  ipcMain.on("req-notes-save", async (_, data) => {
+    createOrUpdateNote(data);
+  });
+
+  ipcMain.on("req-notes-delete", async (_, id) => {
+    deleteNotes(id);
+  });
+
+  ipcMain.on("req-notes-lists", async () => {
+    getAllNotes(mainWindow);
+  });
+
+  ipcMain.on("switch-focus", switchFocusToLastWindow);
 
   mainWindow.loadFile(path.join(__dirname, "../public/index.html"));
 };

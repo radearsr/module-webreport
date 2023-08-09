@@ -19,4 +19,5 @@ mainEl.addEventListener("scroll", () => {
 
 window.addEventListener("DOMContentLoaded", () => {
   electronAPI.reqLoginStatus();
+  electronAPI.reqNoteLists();
 });

@@ -1,4 +1,4 @@
-const forms = document.querySelectorAll("form:not(form#filterData)");
+const forms = document.querySelectorAll("#login > form:not(form#filterData)");
 const passwordViews = document.querySelectorAll(".password-view");
 
 passwordViews.forEach((passView) => {

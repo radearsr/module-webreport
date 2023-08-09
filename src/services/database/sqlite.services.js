@@ -8,8 +8,11 @@ const checkAndCreateAllTable = () => {
     "CREATE TABLE IF NOT EXISTS auth (id INTEGER PRIMARY KEY AUTOINCREMENT, id_list INTEGER, token TEXT)";
   const createTableList =
     "CREATE TABLE IF NOT EXISTS lists (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(100), username VARCHAR(100), password VARCHAR(100), status BOOLEAN DEFAULT FALSE)";
+  const createTableNotes =
+    "CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(255), contents TEXT)";
   db.exec(createTableList);
   db.exec(createTableAuth);
+  db.exec(createTableNotes);
   db.close();
 };
 
@@ -112,6 +115,65 @@ const updateAuthByListId = async (listId, token) => {
   return updatedAuth;
 };
 
+const createNote = async (title, contents) => {
+  checkAndCreateAllTable();
+  const db = sqlite3(databasePath);
+  const queryInsert = "INSERT INTO notes (title, contents) VALUES (?, ?)";
+  const dataToInsert = [title, contents];
+  const insertStatement = db.prepare(queryInsert);
+  const insertedNote = insertStatement.run(dataToInsert);
+  db.close();
+  // console.log(insertedNote);
+  return insertedNote;
+};
+
+const updateNote = async (id, title, contents) => {
+  checkAndCreateAllTable();
+  const db = sqlite3(databasePath);
+  const queryUpdate = "UPDATE notes SET title = ?, contents = ? WHERE id = ?";
+  const dataToUpdate = [title, contents, id];
+  const updateStatement = db.prepare(queryUpdate);
+  const updatedNote = updateStatement.run(dataToUpdate);
+  db.close();
+  // console.log(updatedNote);
+  return updatedNote;
+};
+
+const deleteNote = async (id) => {
+  checkAndCreateAllTable();
+  const db = sqlite3(databasePath);
+  const queryDelete = "DELETE FROM notes WHERE id = ?";
+  const dataToDelete = [id];
+  const deleteStatement = db.prepare(queryDelete);
+  const deletedNote = deleteStatement.run(dataToDelete);
+  db.close();
+  console.log(deletedNote);
+  return deletedNote;
+};
+
+const getNoteById = async (id) => {
+  checkAndCreateAllTable();
+  const db = sqlite3(databasePath);
+  const querySelect = "SELECT * FROM notes WHERE id = ?";
+  const dataToSelect = [id];
+  const selectStatement = db.prepare(querySelect);
+  const selectedNote = selectStatement.get(dataToSelect);
+  db.close();
+  // console.log(selectedNote);
+  return selectedNote;
+}
+
+const getAllNotes = async () => {
+  checkAndCreateAllTable();
+  const db = sqlite3(databasePath);
+  const querySelect = "SELECT * FROM notes";
+  const readStatement = db.prepare(querySelect);
+  const notes = readStatement.all();
+  db.close();
+  // console.log(notes);
+  return notes;
+};
+
 module.exports = {
   createLists,
   createAuth,
@@ -121,4 +183,9 @@ module.exports = {
   readAuthByListId,
   updateAuthByListId,
   updateListStatusByTitle,
+  createNote,
+  updateNote,
+  deleteNote,
+  getNoteById,
+  getAllNotes,
 };

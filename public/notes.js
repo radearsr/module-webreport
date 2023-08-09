@@ -1,34 +1,40 @@
-const notesSection = document.querySelector("#notes-card");
-const addButton = notesSection.querySelector(".add-button");
+const notesWrapper = document.querySelector("#notes-wrapper");
+const addButton = notesWrapper.querySelector(".add-button");
+const firstFormNote = document.querySelector("#NOTE01");
+let formNotes = document.querySelectorAll(".notes-card > form");
 
-const saveButton = document.querySelector("#saveButton");
-const titleInput = document.querySelector("#titleInput");
-const contentTextarea = document.querySelector("#contentTextarea");
-
-saveButton.addEventListener("click", (event) => {
+const formSubmitHandler = (event) => {
   event.preventDefault();
-  const title = titleInput.value;
-  const content = contentTextarea.value;
+  const formData = new FormData(event.target);
+  const title = formData.get("title");
+  const contents = formData.get("contents");
+  const id = formData.get("id");
+  electronAPI.reqNoteSave({ id, title, contents });
+};
 
-  const noteData = {
-    title: title,
-    content: content,
-  };
-  console.log(noteData);
-});
+const formRemoveHandler = (elementContainer, title, noteId) => {
+  // const resultConfirm = confirm(`Anda yakin ingin menghapus note ${title}?`);
+  // electronAPI.reqSwitchToLastWindow();
+  // if (resultConfirm) {
+  // }
+  if (noteId !== "") {
+    electronAPI.reqNoteDelete(noteId);
+  }
+  return elementContainer.remove();
+};
 
-addButton.addEventListener("click", (event) => {
-  event.preventDefault();
+addButton.addEventListener("click", () => {
   const newCard = createCard();
-  notesSection.appendChild(newCard);
+  notesWrapper.appendChild(newCard);
+  formNotes = document.querySelectorAll(".notes-card > form");
 });
 
-const createCard = () => {
+const createCard = (title = "", contents = "", hiddenId = "") => {
   const cardDiv = document.createElement("div");
-  cardDiv.classList.add("w-1/4", "p-2");
+  cardDiv.classList.add("w-1/4", "p-2", "notes-card");
 
-  const cardContentDiv = document.createElement("div");
-  cardContentDiv.classList.add(
+  const cardContentForm = document.createElement("form");
+  cardContentForm.classList.add(
     "flex",
     "flex-col",
     "border",
@@ -40,13 +46,22 @@ const createCard = () => {
     "relative"
   );
 
+  const removeEl = document.createElement("div");
+  removeEl.classList.add("remove-note");
+  
+  cardContentForm.addEventListener("submit", formSubmitHandler);
+
+  cardContentForm.id = `NOTE${(formNotes.length + 1) < 10 ? (`0${formNotes.length + 1}`) : (formNotes.length + 1)}`;
+
   const titleInput = document.createElement("input");
+  titleInput.value = title;
   titleInput.type = "text";
   titleInput.classList.add("text-xl", "font-semibold", "mb-2", "outline-none");
   titleInput.placeholder = "Note Title";
-  titleInput.id = "titleInput";
+  titleInput.setAttribute("name", "title");
 
   const contentTextarea = document.createElement("textarea");
+  contentTextarea.value = contents;
   contentTextarea.classList.add(
     "text-gray-600",
     "resize-none",
@@ -55,7 +70,7 @@ const createCard = () => {
     "outline-none"
   );
   contentTextarea.placeholder = "Note Content";
-  contentTextarea.id = "contentTextarea";
+  contentTextarea.setAttribute("name", "contents");
 
   const saveButton = document.createElement("button");
   saveButton.classList.add(
@@ -66,14 +81,59 @@ const createCard = () => {
     "rounded",
     "hover:bg-blue-600"
   );
+  saveButton.setAttribute("type", "submit");
   saveButton.textContent = "Save";
-  saveButton.id = "saveButton";
 
-  cardContentDiv.appendChild(titleInput);
-  cardContentDiv.appendChild(contentTextarea);
-  cardContentDiv.appendChild(saveButton);
+  const inputHidden = document.createElement("input");
+  inputHidden.setAttribute("type", "hidden");
+  inputHidden.setAttribute("name", "id");
+  inputHidden.value = hiddenId;
+  
+  const svg = `
+    <svg
+      clip-rule="evenodd"
+      fill-rule="evenodd"
+      stroke-linejoin="round"
+      stroke-miterlimit="2"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      class="w-6 h-6 absolute top-2 right-2 text-gray-500 cursor-pointer rotate-45">
+      <path
+        d="m11 11h-7.25c-.414 0-.75.336-.75.75s.336.75.75.75h7.25v7.25c0 .414.336.75.75.75s.75-.336.75-.75v-7.25h7.25c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-7.25v-7.25c0-.414-.336-.75-.75-.75s-.75.336-.75.75z"
+        fill-rule="nonzero" />
+    </svg>
+  `
 
-  cardDiv.appendChild(cardContentDiv);
+  removeEl.addEventListener("click", () => formRemoveHandler(cardDiv, titleInput.value, hiddenId));
+  removeEl.innerHTML = svg;
+  cardContentForm.appendChild(removeEl);
+  cardContentForm.appendChild(inputHidden);
+  cardContentForm.appendChild(titleInput);
+  cardContentForm.appendChild(contentTextarea);
+  cardContentForm.appendChild(saveButton);
+
+  cardDiv.appendChild(cardContentForm);
 
   return cardDiv;
 };
+
+firstFormNote.addEventListener("submit", formSubmitHandler);
+
+electronAPI.resNoteLists((notes) => {
+  if (notes.length) {
+    notes.forEach((note, idx) => {
+      if (idx < 1) {
+        const title = firstFormNote.querySelector("input[name='title']");
+        title.value = note.title;
+        const contents = firstFormNote.querySelector("textarea");
+        contents.textContent = note.contents;
+        const hidden = firstFormNote.querySelector("input[name='id']");
+        hidden.value = note.id;
+        return;
+      }
+      const newCard = createCard(note.title, note.contents, note.id);
+      notesWrapper.appendChild(newCard);
+    });
+  }
+});
