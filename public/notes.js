@@ -14,12 +14,11 @@ buttonElement.addEventListener("click", (event) => {
 
 const formSubmitHandler = (event) => {
   event.preventDefault();
+  const contentValue = document.getElementById("contentDiv");
+  const contents = contentValue.textContent;
   const formData = new FormData(event.target);
-  console.log(formData);
   const title = formData.get("title");
-  const contents = formData.get("contents");
   const id = formData.get("id");
-  console.log(title, contents, id);
   electronAPI.reqNoteSave({ id, title, contents });
 };
 
