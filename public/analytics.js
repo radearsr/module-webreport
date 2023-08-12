@@ -51,6 +51,7 @@ const createTableRow = (kodeProduk, namaProduk, harga) => {
 
 electronAPI.resPriceLists((data) => {
   PRICE_DATAS = data;
+  console.log(PRICE_DATAS);
   let loopingIdx = 1;
   const tableLenght = tables.length;
   tables.forEach((table) => {
@@ -83,32 +84,6 @@ electronAPI.resPriceLists((data) => {
     }
   });
 });
-
-const noticesHandler = () => {
-  return {
-    notices: [],
-    visible: [],
-    add(notice) {
-      notice.id = Date.now();
-      this.notices.push(notice);
-      this.fire(notice.id);
-    },
-    fire(id) {
-      this.visible.push(this.notices.find((notice) => notice.id == id));
-      const timeShown = 2000 * this.visible.length;
-      setTimeout(() => {
-        this.remove(id);
-      }, timeShown);
-    },
-    remove(id) {
-      const notice = this.visible.find((notice) => notice.id == id);
-      const index = this.visible.indexOf(notice);
-      this.visible.splice(index, 1);
-    },
-  };
-};
-
-const notices = noticesHandler();
 
 formFilterData.addEventListener("submit", (event) => {
   event.preventDefault();

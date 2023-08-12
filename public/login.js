@@ -1,9 +1,10 @@
-const forms = document.querySelectorAll("#login > form:not(form#filterData)");
+const forms = document.querySelectorAll("#login form:not(form#filterData)");
 const passwordViews = document.querySelectorAll(".password-view");
 
 passwordViews.forEach((passView) => {
   passView.addEventListener("click", (event) => {
-    const currentAttr = event.target.previousElementSibling.getAttribute("type");
+    const currentAttr =
+      event.target.previousElementSibling.getAttribute("type");
     if (currentAttr === "password") {
       event.target.style.backgroundImage = "url('hide.png')";
       event.target.previousElementSibling.setAttribute("type", "text");
@@ -61,7 +62,6 @@ electronAPI.resLoginAuth((data) => {
   password.disabled = true;
   password.classList.add("bg-gray-200");
 });
-
 
 electronAPI.resLogoutAuth((data) => {
   const form = document.getElementById(data.formId);

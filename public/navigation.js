@@ -44,7 +44,10 @@ const setSvgItemActive = (activeSvg, fillDefault, fillActive) => {
 navbarItems.forEach((navbarItem) => {
   navbarItem.addEventListener("click", () => {
     electronAPI.reqLoginStatus();
-    const currentPage = navbarItem.querySelector("a").getAttribute("href").split("#")[1];
+    const currentPage = navbarItem
+      .querySelector("a")
+      .getAttribute("href")
+      .split("#")[1];
     const anchorEl = navbarItem.querySelector("a");
     const currentSvg = navbarItem.querySelector("svg");
     const currentPageSpan = anchorEl.querySelector("span:last-of-type");
