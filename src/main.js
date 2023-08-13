@@ -70,7 +70,6 @@ const createWindow = () => {
   });
 
   logConsoleOutput(mainWindow);
-
   // mainWindow.webContents.openDevTools();
   ipcMain.on("req-login-auth", async (_, data) => {
     const { formId } = data;

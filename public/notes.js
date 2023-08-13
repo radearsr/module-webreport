@@ -44,6 +44,7 @@ const createDIVForResultSearch = (contentHTML, width, height) => {
   console.log({ width, height });
   const div = document.createElement("div");
   div.setAttribute("class", `text-gray-600 mb-2 outline-none break-all whitespace-pre-line p-2`);
+  div.setAttribute("id", "textResultFilter");
   div.style.width = `${Math.ceil(width)}px`;
   div.style.height = `${Math.ceil(height)}px`;
   div.innerHTML = contentHTML;
@@ -52,18 +53,27 @@ const createDIVForResultSearch = (contentHTML, width, height) => {
 
 const searchCharactersInNotes = (searchValue) => {
   const contentTextArea = document.getElementById("contentTextArea");
-  const { width, height } = contentTextArea.getBoundingClientRect()
-  contentTextArea.classList.add("hidden");
   const contentValue = contentTextArea.value;
+  console.log(searchValue);
 
   if (!searchValue) {
     return contentTextArea.classList.remove("hidden");
   }
+
   const regex = new RegExp(searchValue, "gi");
   const highlightedContent = contentValue.replace(
     regex,
     (match) => `<span class="bg-yellow-200">${match}</span>`
-    );
+  );
+
+  const resultFilter = document.querySelector("#textResultFilter");
+  if (resultFilter) {
+    return resultFilter.innerHTML = highlightedContent;
+  }
+  const { width, height } = contentTextArea.getBoundingClientRect();
+  contentTextArea.classList.add("hidden");
+
+
   const elResultSearch = createDIVForResultSearch(highlightedContent, width, height);
   elResultSearch.addEventListener("click", (event) => {
     contentTextArea.classList.remove("hidden");
